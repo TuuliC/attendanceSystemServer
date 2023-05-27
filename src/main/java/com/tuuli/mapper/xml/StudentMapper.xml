@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuuli.dao.StudentDao">
+
+    <select id="selectListPage" resultType="com.tuuli.vo.StudentVo">
+        select student.id       as id,
+               student.stu_num  as num,
+               student.stu_name as name,
+               student.gender   as gender,
+               class.cl_name    as className,
+               college.col_name as college
+        from tb_student student
+                 left join tb_class class on student.class_id = class.id
+                 left join tb_college college on class.college_id = college.id
+        ${ew.customSqlSegment}
+    </select>
+</mapper>
