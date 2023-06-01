@@ -23,5 +23,14 @@ import java.util.List;
 @Mapper
 public interface StudentDao extends BaseMapper<Student> {
 
+//    @Select(" select student.id       as id,\n" +
+//            "               student.stu_num  as num,\n" +
+//            "               student.stu_name as name,\n" +
+//            "               student.gender   as gender,\n" +
+//            "               class.cl_name    as className,\n" +
+//            "               college.col_name as college\n" +
+//            "        from tb_student student\n" +
+//            "                 left join tb_class class on student.class_id = class.id\n" +
+//            "                 left join tb_college college on class.college_id = college.id #{ew.customSqlSegment}")
     List<StudentVo> selectListPage(IPage<Student> page, @Param(Constants.WRAPPER) QueryWrapper<Student> studentQueryWrapper);
 }

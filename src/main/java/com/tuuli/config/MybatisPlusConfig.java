@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @description
  */
 @Configuration
-@MapperScan("com.tuuli.mapper.xml")
+
 public class MybatisPlusConfig {
 
     @Bean

@@ -2,6 +2,11 @@ package com.tuuli.service;
 
 import com.tuuli.domain.College;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tuuli.dto.CollegeDto;
+import com.tuuli.vo.CollegeAndClassAndCourseVo;
+import com.tuuli.vo.CollegeVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-05-22
  */
 public interface ICollegeService extends IService<College> {
+    List<CollegeAndClassAndCourseVo> getAllCollege();
 
+    List<CollegeVo> getCollegePage(CollegeDto collegeDto);
 }

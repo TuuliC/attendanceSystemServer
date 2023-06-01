@@ -2,6 +2,11 @@ package com.tuuli.service;
 
 import com.tuuli.domain.Classs;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tuuli.dto.ClassDto;
+import com.tuuli.vo.ClassVo;
+import com.tuuli.vo.CollegeAndClassAndCourseVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-05-22
  */
 public interface IClassService extends IService<Classs> {
+    List<CollegeAndClassAndCourseVo> getAllClass(Integer collegeId);
 
+    List<ClassVo> getClassPage(ClassDto classDto);
 }

@@ -1,14 +1,24 @@
 package com.tuuli.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tuuli.domain.Classs;
 import com.tuuli.dao.ClassDao;
+import com.tuuli.dto.ClassDto;
 import com.tuuli.service.IClassService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tuuli.vo.ClassVo;
+import com.tuuli.vo.CollegeAndClassAndCourseVo;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author tuuli
@@ -17,4 +27,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements IClassService {
 
+    @Autowired
+    private ClassDao classDao;
+
+    @Override
+    public List<CollegeAndClassAndCourseVo> getAllClass(Integer collegeId) {
+        List<CollegeAndClassAndCourseVo> classVoList = classDao.getAllClass(collegeId);
+        return classVoList;
+    }
+
+    @Override
+    public List<ClassVo> getClassPage(ClassDto classDto) {
+        IPage<Classs> page = new Page<>(classDto.getPage(), classDto.getPageSize());
+        LambdaQueryWrapper<Classs> classQueryWrapper = new LambdaQueryWrapper<>();
+        classQueryWrapper.eq(classDto.getCollegeId() != null, Classs::getCollegeId, classDto.getCollegeId())
+                .like(!StringUtils.isBlank(classDto.getName()),Classs::getClassName,classDto.getName());
+        List<ClassVo> classVoList = classDao.selectListPage(page, classQueryWrapper);
+        return classVoList;
+    }
 }

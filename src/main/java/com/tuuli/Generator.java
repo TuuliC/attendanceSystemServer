@@ -44,7 +44,7 @@ public class Generator {
 
         //策略设置
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("record_detail");//设置参与生成的表名，可填一个或多个
+        strategyConfig.setInclude("tb_student");//设置参与生成的表名，可填一个或多个
         strategyConfig.setTablePrefix("tb_");//设置数据库表名的前缀名称，设置后会省略该前缀
         strategyConfig.setRestControllerStyle(false);//设置是否启用Rest风格
         strategyConfig.setLogicDeleteFieldName("deleted");//设置逻辑删除字段名，没有就不填
@@ -52,7 +52,7 @@ public class Generator {
         autoGenerator.setStrategy(strategyConfig);
 
         //执行生成操作
-        //autoGenerator.execute();
+        autoGenerator.execute();
     }
 
 }

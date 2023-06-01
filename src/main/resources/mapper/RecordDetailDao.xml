@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuuli.dao.RecordDetailDao">
+
+    <select id="selectListPage" resultType="com.tuuli.domain.RecordDetail">
+        select stu_num     num,
+               stu_name    name,
+               gender,
+               class_name  className,
+               recordDetail.col_name    collegeName,
+               recordDetail.course_name courseName,
+               time
+        from record_detail recordDetail
+            ${ew.customSqlSegment}
+    </select>
+</mapper>

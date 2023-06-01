@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tuuli.dao.CollegeDao">
+
+    <select id="selectListPage" resultType="com.tuuli.vo.CollegeVo">
+        select college.id, college.col_name as college, count(class.id) classCount
+        from tb_college college
+                 left join tb_class class on college.id = class.college_id
+            ${ew.customSqlSegment}
+        group by class.id, college.id
+    </select>
+</mapper>

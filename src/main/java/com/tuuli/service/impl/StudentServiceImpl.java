@@ -1,5 +1,6 @@
 package com.tuuli.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,6 +13,7 @@ import com.tuuli.vo.StudentVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -26,20 +28,24 @@ import java.util.List;
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> implements IStudentService {
 
-//    @Autowired
-//    private StudentDao studentDao;
+    @Autowired
+    private StudentDao studentDao;
 
     @Override
     public List<StudentVo> getStudentPage(StudentDto studentDto) {
-//        IPage<Student> page = new Page<>(studentDto.getPage(), studentDto.getPageSize());
-//        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-//        studentQueryWrapper.eq(!StringUtils.isBlank(studentDto.getGender()), "student.gender", studentDto.getGender())
-//                .eq(studentDto.getClassId() != null, "student.class_id", studentDto.getClassId())
-//                .like(!StringUtils.isBlank(studentDto.getName()),"student.stu_name",studentDto.getName());
-//        List<StudentVo> studentVoList = studentDao.selectListPage(page, studentQueryWrapper);
-//
-//        return studentVoList;
-        return null;
+        IPage<Student> page = new Page<>(studentDto.getPage(), studentDto.getPageSize());
+        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
+        studentQueryWrapper.eq(studentDto.getCollegeId() != null, "class.college_id", studentDto.getCollegeId())
+                .lambda().eq(!StringUtils.isBlank(studentDto.getGender()), Student::getGender, studentDto.getGender())
+                .eq(studentDto.getClassId() != null, Student::getClassId, studentDto.getClassId());
+        studentQueryWrapper.and(!StringUtils.isBlank(studentDto.getName()), qw -> qw.lambda()
+                .like(Student::getName, studentDto.getName())
+                .or()
+                .like(Student::getNum, studentDto.getName()));
+        List<StudentVo> studentVoList = studentDao.selectListPage(page, studentQueryWrapper);
+
+        return studentVoList;
+
 
     }
 }

@@ -1,16 +1,15 @@
 package com.tuuli.domain;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author tuuli
@@ -26,9 +25,11 @@ public class Sc implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer course_id;
+    @TableField(value = "course_id")
+    private Integer courseId;
 
-    private Integer stu_id;
+    @TableField(value = "stu_id")
+    private Integer stuId;
 
     @TableLogic
     private Integer deleted;
