@@ -1,6 +1,7 @@
 package com.tuuli.dao;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.tuuli.domain.Classs;
@@ -24,8 +25,8 @@ import java.util.List;
 @Mapper
 public interface ClassDao extends BaseMapper<Classs> {
 
-    @Select("select id, cl_name name from tb_class where college_id=#{collegeId} and  deleted = 0")
-    List<CollegeAndClassAndCourseVo> getAllClass(Integer collegeId);
+    //@Select("select id, cl_name name from tb_class where college_id in #{collegeIdList} and  deleted = 0")
+    List<CollegeAndClassAndCourseVo> getAllClass(@Param(Constants.WRAPPER) QueryWrapper<Classs> classQueryWrapper);
 
     List<ClassVo> selectListPage(IPage<Classs> page, @Param(Constants.WRAPPER) LambdaQueryWrapper<Classs> classQueryWrapper);
 }

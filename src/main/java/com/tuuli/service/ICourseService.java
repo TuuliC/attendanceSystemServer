@@ -15,5 +15,5 @@ import java.util.List;
  * @since 2023-05-22
  */
 public interface ICourseService extends IService<Course> {
-    List<CollegeAndClassAndCourseVo> getAllCourse(Integer classId);
+    List<CollegeAndClassAndCourseVo> getAllCourse(Integer[] classId);
 }

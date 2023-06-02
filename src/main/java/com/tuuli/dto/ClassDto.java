@@ -11,5 +11,5 @@ public class ClassDto {
     private Integer page;
     private Integer pageSize;
     private String name;
-    private Integer collegeId;
+    private Integer[] collegeList;
 }

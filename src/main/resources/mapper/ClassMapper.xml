@@ -10,4 +10,10 @@
             ${ew.customSqlSegment}
         group by class.id, college.id
     </select>
+    <select id="getAllClass" resultType="com.tuuli.vo.CollegeAndClassAndCourseVo">
+        select class.id, cl_name name
+        from tb_class class left join tb_college college on college.id = class.college_id
+        ${ew.customSqlSegment}
+
+    </select>
 </mapper>

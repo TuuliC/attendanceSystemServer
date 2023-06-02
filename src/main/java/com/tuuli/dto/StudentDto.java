@@ -13,6 +13,6 @@ public class StudentDto {
    private Integer pageSize;
    private String name;
    private String gender;
-   private Integer collegeId;
-   private Integer classId;
+   private Integer[] collegeList;
+   private Integer[] classList;
 }

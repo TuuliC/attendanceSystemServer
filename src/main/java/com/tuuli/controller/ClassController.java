@@ -11,6 +11,7 @@ import com.tuuli.vo.StudentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,10 +37,12 @@ public class ClassController {
         return R.success(classVoList);
     }
 
-    @GetMapping("/getSelectClass/{collegeId}")
-    public R<List<CollegeAndClassAndCourseVo>> getAllClass(@PathVariable Integer collegeId){
+    @PostMapping("/getSelectClass")
+    public R<List<CollegeAndClassAndCourseVo>> getAllClass(@RequestBody Integer[] collegeId){
+        System.out.println("------------------\n collegeId = " + Arrays.toString(collegeId));
         List<CollegeAndClassAndCourseVo> classVoList = classService.getAllClass(collegeId);
         return R.success(classVoList);
+        //return R.success(null);
     }
 }
 

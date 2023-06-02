@@ -19,6 +19,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,31 +46,40 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
     @Override
     public List<RecordDetail> getRecordPage(RecordDto recordDto) {
 
-        String courseName = null, collegeName = null, className = null;
-
+        //String courseName = null, collegeName = null, className = null;
+        String courseName = null;
+        ArrayList<String> collegeName = new ArrayList<>(), className = new ArrayList<>();
         if (recordDto.getCourseId() != null) {
             LambdaQueryWrapper<Course> courseLambdaQueryWrapper = new LambdaQueryWrapper<>();
             courseLambdaQueryWrapper.select(Course::getCourseName).eq(Course::getId, recordDto.getCourseId());
             Course course = courseDao.selectOne(courseLambdaQueryWrapper);
             courseName = course.getCourseName();
         }
-        if (recordDto.getCollegeId() != null) {
+        if (recordDto.getCollegeList().length > 0) {
             LambdaQueryWrapper<College> collegeLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            collegeLambdaQueryWrapper.select(College::getName).eq(College::getId, recordDto.getCollegeId());
-            College college = collegeDao.selectOne(collegeLambdaQueryWrapper);
-            collegeName = college.getName();
+            collegeLambdaQueryWrapper.select(College::getName).in(College::getId, Arrays.asList(recordDto.getCollegeList()));
+            List<College> collegeList = collegeDao.selectList(collegeLambdaQueryWrapper);
+            //collegeName = college.getName();
+            for (College c : collegeList
+            ) {
+                collegeName.add(c.getName());
+            }
         }
-        if (recordDto.getClassId() != null) {
+        if (recordDto.getClassList().length > 0) {
             LambdaQueryWrapper<Classs> classLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            classLambdaQueryWrapper.select(Classs::getClassName).eq(Classs::getId, recordDto.getClassId());
-            Classs classs = classDao.selectOne(classLambdaQueryWrapper);
-            className = classs.getClassName();
+            classLambdaQueryWrapper.select(Classs::getClassName).in(Classs::getId, Arrays.asList(recordDto.getClassList()));
+            List<Classs> classList = classDao.selectList(classLambdaQueryWrapper);
+//            className = classs.getClassName();
+            for (Classs c : classList
+            ) {
+                className.add(c.getClassName());
+            }
         }
 
         IPage<RecordDetail> page = new Page<>(recordDto.getPage(), recordDto.getPageSize());
         QueryWrapper<RecordDetail> recordQueryWrapper = new QueryWrapper<>();
-        recordQueryWrapper.eq(recordDto.getClassId() != null, "recordDetail.class_name", className)
-                .eq(recordDto.getCollegeId() != null, "recordDetail.col_name", collegeName)
+        recordQueryWrapper.in(recordDto.getClassList().length > 0, "recordDetail.class_name", className)
+                .in(recordDto.getCollegeList().length > 0, "recordDetail.col_name", collegeName)
                 .eq(recordDto.getCourseId() != null, "recordDetail.course_name", courseName);
         recordQueryWrapper.and(!StringUtils.isBlank(recordDto.getName()), qw -> qw
                 .like("recordDetail.stu_name", recordDto.getName())

@@ -26,8 +26,8 @@ public class CourseController {
     @Autowired
     private ICourseService courseService;
 
-    @GetMapping("/getSelectCourse/{classId}")
-    public R<List<CollegeAndClassAndCourseVo>> getAllClass(@PathVariable Integer classId){
+    @PostMapping("/getSelectCourse")
+    public R<List<CollegeAndClassAndCourseVo>> getAllClass(@RequestBody Integer[] classId){
         List<CollegeAndClassAndCourseVo> courseVoList = courseService.getAllCourse(classId);
         return R.success(courseVoList);
     }

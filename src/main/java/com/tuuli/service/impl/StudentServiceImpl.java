@@ -1,6 +1,5 @@
 package com.tuuli.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,8 +12,8 @@ import com.tuuli.vo.StudentVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,9 +34,9 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
     public List<StudentVo> getStudentPage(StudentDto studentDto) {
         IPage<Student> page = new Page<>(studentDto.getPage(), studentDto.getPageSize());
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-        studentQueryWrapper.eq(studentDto.getCollegeId() != null, "class.college_id", studentDto.getCollegeId())
+        studentQueryWrapper.in(studentDto.getCollegeList().length>0, "class.college_id", Arrays.asList(studentDto.getCollegeList()))
                 .lambda().eq(!StringUtils.isBlank(studentDto.getGender()), Student::getGender, studentDto.getGender())
-                .eq(studentDto.getClassId() != null, Student::getClassId, studentDto.getClassId());
+                .in(studentDto.getClassList().length>0, Student::getClassId, Arrays.asList(studentDto.getClassList()));
         studentQueryWrapper.and(!StringUtils.isBlank(studentDto.getName()), qw -> qw.lambda()
                 .like(Student::getName, studentDto.getName())
                 .or()

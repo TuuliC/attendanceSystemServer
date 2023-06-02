@@ -13,6 +13,6 @@ public class RecordDto {
     private Integer pageSize;
     private String name;
     private Integer courseId;
-    private Integer collegeId;
-    private Integer classId;
+    private Integer[] collegeList;
+    private Integer[] classList;
 }
