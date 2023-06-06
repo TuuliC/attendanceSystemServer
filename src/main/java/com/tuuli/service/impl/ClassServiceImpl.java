@@ -35,7 +35,8 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
     @Override
     public List<CollegeAndClassAndCourseVo> getAllClass(Integer[] collegeId) {
         QueryWrapper<Classs> classLambdaQueryWrapper = new QueryWrapper<>();
-        classLambdaQueryWrapper.lambda().in(Classs::getCollegeId,Arrays.asList(collegeId));
+        classLambdaQueryWrapper.eq("class.deleted", 0).eq("college.deleted=0", 0)
+                .lambda().in(Classs::getCollegeId, Arrays.asList(collegeId));
         List<CollegeAndClassAndCourseVo> classVoList = classDao.getAllClass(classLambdaQueryWrapper);
         return classVoList;
     }
@@ -43,10 +44,27 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
     @Override
     public List<ClassVo> getClassPage(ClassDto classDto) {
         IPage<Classs> page = new Page<>(classDto.getPage(), classDto.getPageSize());
-        LambdaQueryWrapper<Classs> classQueryWrapper = new LambdaQueryWrapper<>();
-        classQueryWrapper.in(classDto.getCollegeList().length>0, Classs::getCollegeId, Arrays.asList(classDto.getCollegeList()))
-                .like(!StringUtils.isBlank(classDto.getName()),Classs::getClassName,classDto.getName());
+        QueryWrapper<Classs> classQueryWrapper = new QueryWrapper<>();
+        classQueryWrapper.eq("student.deleted",0).eq("class.deleted",0).eq("college.deleted",0)
+                .lambda().in(classDto.getCollegeList().length > 0, Classs::getCollegeId, Arrays.asList(classDto.getCollegeList()))
+                .like(!StringUtils.isBlank(classDto.getName()), Classs::getClassName, classDto.getName());
         List<ClassVo> classVoList = classDao.selectListPage(page, classQueryWrapper);
         return classVoList;
+    }
+
+    @Override
+    public ClassVo queryClassById(Integer id) {
+        ClassVo classVo = classDao.queryClassById(id);
+        return classVo;
+    }
+
+    @Override
+    public void updateClass(Classs classs) {
+        classDao.updateById(classs);
+    }
+
+    @Override
+    public void addClass(Classs classs) {
+        classDao.insert(classs);
     }
 }

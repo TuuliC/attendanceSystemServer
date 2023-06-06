@@ -7,6 +7,6 @@
         from tb_college college
                  left join tb_class class on college.id = class.college_id
             ${ew.customSqlSegment}
-        group by class.id, college.id
+        group by college.id
     </select>
 </mapper>

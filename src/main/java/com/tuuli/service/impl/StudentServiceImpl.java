@@ -1,13 +1,20 @@
 package com.tuuli.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tuuli.dao.ClassDao;
+import com.tuuli.dao.CollegeDao;
+import com.tuuli.dao.CourseDao;
+import com.tuuli.domain.Course;
 import com.tuuli.domain.Student;
 import com.tuuli.dao.StudentDao;
+import com.tuuli.dto.ListCallDto;
 import com.tuuli.dto.StudentDto;
 import com.tuuli.service.IStudentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tuuli.vo.ListCallVo;
 import com.tuuli.vo.StudentVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +36,12 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
 
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private CourseDao courseDao;
+    @Autowired
+    private CollegeDao collegeDao;
+    @Autowired
+    private ClassDao classDao;
 
     @Override
     public List<StudentVo> getStudentPage(StudentDto studentDto) {
@@ -45,6 +58,36 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
 
         return studentVoList;
 
+    }
 
+    @Override
+    public List<ListCallVo> getListCallPage(ListCallDto listCallDto) {
+        System.out.println("---\nlistCallDto = " + listCallDto);
+        IPage<Student> page = new Page<>(listCallDto.getPage(), listCallDto.getPageSize());
+        QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
+        Course course = courseDao.selectOne(new LambdaQueryWrapper<Course>().select(Course::getCourseName).eq(Course::getId, listCallDto.getCourseId()));
+        studentQueryWrapper.in(listCallDto.getClassList().length>0,"student.class_id",Arrays.asList(listCallDto.getClassList()))
+                .eq("re.course_name",course.getCourseName())
+                .eq(!StringUtils.isBlank(listCallDto.getGender()),"student.gender",listCallDto.getGender())
+                .like(!StringUtils.isBlank(listCallDto.getName()),"student.name",listCallDto.getName())
+                .in(listCallDto.getStateList().length>0,"re.status",Arrays.asList(listCallDto.getStateList()));
+        List<ListCallVo> listCallVoList= studentDao.getListCallPage(page,studentQueryWrapper);
+        return listCallVoList;
+    }
+
+    @Override
+    public StudentVo queryStudentById(Integer id) {
+        StudentVo studentVo = studentDao.queryStudentById(id);
+        return studentVo;
+    }
+
+    @Override
+    public void updateStudent(Student student) {
+        studentDao.updateById(student);
+    }
+
+    @Override
+    public void addStudent(Student student) {
+        studentDao.insert(student);
     }
 }

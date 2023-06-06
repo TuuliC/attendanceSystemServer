@@ -9,8 +9,7 @@ import com.tuuli.vo.CollegeAndClassAndCourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -29,7 +28,8 @@ public class CourseServiceImpl extends ServiceImpl<CourseDao, Course> implements
     @Override
     public List<CollegeAndClassAndCourseVo> getAllCourse(Integer[] classId) {
         QueryWrapper<Course> courseQueryWrapper = new QueryWrapper<>();
-        courseQueryWrapper.in("student.class_id", Arrays.asList(classId));
+        courseQueryWrapper.eq("course.deleted",0).eq("sc.deleted",0).eq("student.deleted",0)
+                .in("student.class_id", Arrays.asList(classId));
         List<CollegeAndClassAndCourseVo> courseVoList = courseDao.getAllCourse(courseQueryWrapper);
         return courseVoList;
     }

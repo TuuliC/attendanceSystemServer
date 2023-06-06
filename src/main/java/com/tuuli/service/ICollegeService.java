@@ -20,4 +20,10 @@ public interface ICollegeService extends IService<College> {
     List<CollegeAndClassAndCourseVo> getAllCollege();
 
     List<CollegeVo> getCollegePage(CollegeDto collegeDto);
+
+    void addCollege(College college);
+
+    College queryClassById(Integer id);
+
+    void updateCollege(College college);
 }

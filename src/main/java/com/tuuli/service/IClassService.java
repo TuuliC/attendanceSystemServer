@@ -20,4 +20,10 @@ public interface IClassService extends IService<Classs> {
     List<CollegeAndClassAndCourseVo> getAllClass(Integer[] collegeId);
 
     List<ClassVo> getClassPage(ClassDto classDto);
+
+    ClassVo queryClassById(Integer id);
+
+    void updateClass(Classs classs);
+
+    void addClass(Classs classs);
 }

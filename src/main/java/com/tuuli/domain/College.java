@@ -25,7 +25,7 @@ public class College implements Serializable {
     private Integer id;
 
     @TableField(value = "col_name")
-    private String name;
+    private String collegeName;
 
     @TableLogic
     private Integer deleted;

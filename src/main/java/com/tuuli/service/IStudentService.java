@@ -2,7 +2,9 @@ package com.tuuli.service;
 
 import com.tuuli.domain.Student;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tuuli.dto.ListCallDto;
 import com.tuuli.dto.StudentDto;
+import com.tuuli.vo.ListCallVo;
 import com.tuuli.vo.StudentVo;
 
 import java.util.List;
@@ -17,4 +19,12 @@ import java.util.List;
  */
 public interface IStudentService extends IService<Student> {
     List<StudentVo> getStudentPage(StudentDto studentDto);
+
+    List<ListCallVo> getListCallPage(ListCallDto listCallDto);
+
+    StudentVo queryStudentById(Integer id);
+
+    void updateStudent(Student student);
+
+    void addStudent(Student student);
 }

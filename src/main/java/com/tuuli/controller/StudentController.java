@@ -2,8 +2,12 @@ package com.tuuli.controller;
 
 
 import com.tuuli.common.R;
+import com.tuuli.domain.Student;
+import com.tuuli.dto.AddStudentDto;
+import com.tuuli.dto.ListCallDto;
 import com.tuuli.dto.StudentDto;
 import com.tuuli.service.IStudentService;
+import com.tuuli.vo.ListCallVo;
 import com.tuuli.vo.StudentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +24,7 @@ import java.util.List;
  * @author tuuli
  * @since 2023-05-22
  */
-@CrossOrigin(origins = "http://localhost:8089", methods = {RequestMethod.POST}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:8089", methods = {RequestMethod.POST,RequestMethod.GET}, allowCredentials = "true")
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -30,12 +34,38 @@ public class StudentController {
 
     @PostMapping("/getStudentPage")
     public R<List<StudentVo>> getStudentPage(@RequestBody StudentDto studentDto) {
-        System.out.println("studentDto = " + studentDto);
+        //System.out.println("studentDto = " + studentDto);
         List<StudentVo> studentVoList = studentService.getStudentPage(studentDto);
-        System.out.println("studentVoList = " + studentVoList);
+        //System.out.println("studentVoList = " + studentVoList);
         return R.success(studentVoList);
     }
 
+    @PostMapping("/getListCallPage")
+    public R<List<ListCallVo>> getListCallPage(@RequestBody ListCallDto listCallDto) {
+        List<ListCallVo> listCallVoList = studentService.getListCallPage(listCallDto);
+        return R.success(listCallVoList);
+    }
+
+    @GetMapping("/queryStudentById/{id}")
+    public R<StudentVo> queryStudentById(@PathVariable Integer id){
+        //System.out.println("id = " + id);
+        StudentVo studentVo = studentService.queryStudentById(id);
+        return R.success(studentVo);
+    }
+
+    @PostMapping("/updateStudent")
+    public R<String> updateStudent(@RequestBody Student student){
+        //System.out.println("addStudentDto = " + student);
+        studentService.updateStudent(student);
+        return R.success("success");
+    }
+
+    @PostMapping("/addStudent")
+    public R<String> addStudent(@RequestBody Student student){
+        //System.out.println("student = " + student);
+        studentService.addStudent(student);
+        return R.success("success");
+    }
 
 }
 

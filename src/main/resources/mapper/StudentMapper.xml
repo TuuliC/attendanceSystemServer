@@ -11,7 +11,18 @@
         from tb_student student
                  left join tb_class class on student.class_id = class.id
                  left join tb_college college on class.college_id = college.id
-        ${ew.customSqlSegment}
+            ${ew.customSqlSegment}
+    </select>
+    <select id="getListCallPage" resultType="com.tuuli.vo.ListCallVo">
+        SELECT student.stu_num num,
+               student.stu_name name,
+               student.gender gender,
+               re.class_name className,
+               re.col_name college,
+               re.status
+        FROM tb_student student
+                 LEFT JOIN record_detail re on student.stu_num = re.stu_num
+            ${ew.customSqlSegment}
     </select>
 
 </mapper>

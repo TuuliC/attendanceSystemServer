@@ -2,6 +2,8 @@ package com.tuuli.controller;
 
 
 import com.tuuli.common.R;
+import com.tuuli.domain.Classs;
+import com.tuuli.domain.Student;
 import com.tuuli.dto.ClassDto;
 import com.tuuli.dto.StudentDto;
 import com.tuuli.service.IClassService;
@@ -31,18 +33,34 @@ public class ClassController {
 
     @PostMapping("/getClassPage")
     public R<List<ClassVo>> getClassPage(@RequestBody ClassDto classDto) {
-        System.out.println("classDto = " + classDto);
         List<ClassVo> classVoList = classService.getClassPage(classDto);
-        System.out.println("classVoList = " + classVoList);
         return R.success(classVoList);
     }
 
     @PostMapping("/getSelectClass")
     public R<List<CollegeAndClassAndCourseVo>> getAllClass(@RequestBody Integer[] collegeId){
-        System.out.println("------------------\n collegeId = " + Arrays.toString(collegeId));
         List<CollegeAndClassAndCourseVo> classVoList = classService.getAllClass(collegeId);
         return R.success(classVoList);
-        //return R.success(null);
     }
+
+    @GetMapping("/queryClassById/{id}")
+    public R<ClassVo> queryStudentById(@PathVariable Integer id){
+        ClassVo classVo = classService.queryClassById(id);
+        return R.success(classVo);
+    }
+
+    @PostMapping("/updateClass")
+    public R<String> updateStudent(@RequestBody Classs classs){
+        //classService.update(classs,null);
+        classService.updateClass(classs);
+        return R.success("success");
+    }
+
+    @PostMapping("/addClass")
+    public R<String> addClass(@RequestBody Classs classs){
+        classService.addClass(classs);
+        return R.success("success");
+    }
+
 }
 

@@ -29,6 +29,8 @@ public class Record implements Serializable {
 
     private Integer sc_id;
 
+    private String status;
+
     private LocalDateTime time;
 
     @TableLogic

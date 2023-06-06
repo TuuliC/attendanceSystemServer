@@ -47,6 +47,7 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
     public List<RecordDetail> getRecordPage(RecordDto recordDto) {
 
         //String courseName = null, collegeName = null, className = null;
+        //recordDto获取的是id，需将id转为name
         String courseName = null;
         ArrayList<String> collegeName = new ArrayList<>(), className = new ArrayList<>();
         if (recordDto.getCourseId() != null) {
@@ -57,12 +58,12 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
         }
         if (recordDto.getCollegeList().length > 0) {
             LambdaQueryWrapper<College> collegeLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            collegeLambdaQueryWrapper.select(College::getName).in(College::getId, Arrays.asList(recordDto.getCollegeList()));
+            collegeLambdaQueryWrapper.select(College::getCollegeName).in(College::getId, Arrays.asList(recordDto.getCollegeList()));
             List<College> collegeList = collegeDao.selectList(collegeLambdaQueryWrapper);
             //collegeName = college.getName();
             for (College c : collegeList
             ) {
-                collegeName.add(c.getName());
+                collegeName.add(c.getCollegeName());
             }
         }
         if (recordDto.getClassList().length > 0) {

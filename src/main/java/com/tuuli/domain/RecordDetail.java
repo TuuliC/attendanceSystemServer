@@ -38,6 +38,8 @@ public class RecordDetail implements Serializable {
     @TableField(value = "course_name")
     private String courseName;
 
+    private String status;
+
     private String time;
 
 
