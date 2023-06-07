@@ -5,8 +5,16 @@
     <select id="getAllCourse" resultType="com.tuuli.vo.CollegeAndClassAndCourseVo">
         select distinct course.id, course.course_name name
         from tb_course course
-                 join tb_SC sc on course.id = SC.course_id
-                 join tb_student student on SC.stu_id = student.id
+                 join tb_CC cc on course.id = cc.course_id
             ${ew.customSqlSegment}
+    </select>
+    <select id="getCoursePage" resultType="com.tuuli.vo.CourseVo">
+        SELECT course.id, course.course_name, GROUP_CONCAT(class.cl_name) AS classListStr, COUNT(class.id) AS classCount
+        FROM tb_course course
+                 LEFT JOIN tb_cc cc ON course.id = cc.course_id
+                 LEFT JOIN tb_class class ON cc.class_id = class.id
+            ${ew.customSqlSegment}
+        GROUP BY course.course_name
+
     </select>
 </mapper>

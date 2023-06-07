@@ -1,10 +1,8 @@
 package com.tuuli.domain;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,7 +25,11 @@ public class Record implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer sc_id;
+    @TableField(value="stu_id")
+    private Integer stuId;
+
+    @TableField(value="cc_id")
+    private Integer ccId;
 
     private String status;
 

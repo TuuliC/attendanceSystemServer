@@ -13,6 +13,7 @@ import com.tuuli.vo.ClassVo;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -35,8 +36,8 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
     @Override
     public List<CollegeAndClassAndCourseVo> getAllClass(Integer[] collegeId) {
         QueryWrapper<Classs> classLambdaQueryWrapper = new QueryWrapper<>();
-        classLambdaQueryWrapper.eq("class.deleted", 0).eq("college.deleted=0", 0)
-                .lambda().in(Classs::getCollegeId, Arrays.asList(collegeId));
+        classLambdaQueryWrapper.eq("class.deleted",0)
+                .lambda().in(collegeId != null, Classs::getCollegeId, Arrays.asList(collegeId));
         List<CollegeAndClassAndCourseVo> classVoList = classDao.getAllClass(classLambdaQueryWrapper);
         return classVoList;
     }
@@ -45,7 +46,7 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
     public List<ClassVo> getClassPage(ClassDto classDto) {
         IPage<Classs> page = new Page<>(classDto.getPage(), classDto.getPageSize());
         QueryWrapper<Classs> classQueryWrapper = new QueryWrapper<>();
-        classQueryWrapper.eq("student.deleted",0).eq("class.deleted",0).eq("college.deleted",0)
+        classQueryWrapper.eq("class.deleted",0).eq("college.deleted",0)
                 .lambda().in(classDto.getCollegeList().length > 0, Classs::getCollegeId, Arrays.asList(classDto.getCollegeList()))
                 .like(!StringUtils.isBlank(classDto.getName()), Classs::getClassName, classDto.getName());
         List<ClassVo> classVoList = classDao.selectListPage(page, classQueryWrapper);
@@ -66,5 +67,10 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
     @Override
     public void addClass(Classs classs) {
         classDao.insert(classs);
+    }
+
+    @Override
+    public void deleteClass(Integer[] id) {
+        classDao.deleteBatchIds(Arrays.asList(id));
     }
 }

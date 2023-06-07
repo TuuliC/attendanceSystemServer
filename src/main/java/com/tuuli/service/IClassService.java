@@ -26,4 +26,6 @@ public interface IClassService extends IService<Classs> {
     void updateClass(Classs classs);
 
     void addClass(Classs classs);
+
+    void deleteClass(Integer[] id);
 }

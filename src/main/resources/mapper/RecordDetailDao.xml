@@ -6,7 +6,7 @@
         select stu_num     num,
                stu_name    name,
                gender,
-               class_name  className,
+               cl_name  className,
                recordDetail.col_name    collegeName,
                recordDetail.course_name courseName,
                time

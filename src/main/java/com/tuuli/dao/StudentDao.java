@@ -24,7 +24,7 @@ import java.util.List;
 @Mapper
 public interface StudentDao extends BaseMapper<Student> {
 
-//    @Select(" select student.id       as id,\n" +
+    //    @Select(" select student.id       as id,\n" +
 //            "               student.stu_num  as num,\n" +
 //            "               student.stu_name as name,\n" +
 //            "               student.gender   as gender,\n" +
@@ -35,14 +35,12 @@ public interface StudentDao extends BaseMapper<Student> {
 //            "                 left join tb_college college on class.college_id = college.id #{ew.customSqlSegment}")
     List<StudentVo> selectListPage(IPage<Student> page, @Param(Constants.WRAPPER) QueryWrapper<Student> studentQueryWrapper);
 
-    List<ListCallVo> getListCallPage(IPage<Student> page, @Param(Constants.WRAPPER)QueryWrapper<Student> studentQueryWrapper);
+    List<ListCallVo> getListCallPage(IPage<Student> page, @Param(Constants.WRAPPER) QueryWrapper<Student> studentQueryWrapper);
 
     @Select("SELECT s.stu_num num, s.stu_name name, s.gender, co.col_name  AS college, c.cl_name AS className\n" +
             "FROM tb_student s\n" +
-            "JOIN tb_class c ON s.class_id = c.id\n" +
-            "JOIN tb_college co ON c.college_id = co.id\n" +
-            "WHERE s.id = #{id} " +
-            "and c.deleted = 0 " +
-            "and co.deleted = 0\n")
+            "JOIN tb_class c ON s.class_id = c.id \n" +
+            "JOIN tb_college co ON c.college_id = co.id \n" +
+            "WHERE s.id = #{id}")
     StudentVo queryStudentById(Integer id);
 }

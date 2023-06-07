@@ -57,5 +57,10 @@ public class CollegeController {
         return R.success("success");
     }
 
+    @PostMapping("/deleteCollege")
+    public R<String> deleteCollege(@RequestBody Integer[] id){
+        collegeService.deleteCollege(id);
+        return R.success("success");
+    }
 }
 

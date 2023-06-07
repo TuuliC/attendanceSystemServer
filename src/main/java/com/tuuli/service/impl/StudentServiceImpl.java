@@ -48,8 +48,10 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
         IPage<Student> page = new Page<>(studentDto.getPage(), studentDto.getPageSize());
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.in(studentDto.getCollegeList().length>0, "class.college_id", Arrays.asList(studentDto.getCollegeList()))
+                .eq("student.deleted",0).eq("class.deleted",0).eq("college.deleted",0)
                 .lambda().eq(!StringUtils.isBlank(studentDto.getGender()), Student::getGender, studentDto.getGender())
                 .in(studentDto.getClassList().length>0, Student::getClassId, Arrays.asList(studentDto.getClassList()));
+
         studentQueryWrapper.and(!StringUtils.isBlank(studentDto.getName()), qw -> qw.lambda()
                 .like(Student::getName, studentDto.getName())
                 .or()
@@ -71,6 +73,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
                 .eq(!StringUtils.isBlank(listCallDto.getGender()),"student.gender",listCallDto.getGender())
                 .like(!StringUtils.isBlank(listCallDto.getName()),"student.name",listCallDto.getName())
                 .in(listCallDto.getStateList().length>0,"re.status",Arrays.asList(listCallDto.getStateList()));
+
         List<ListCallVo> listCallVoList= studentDao.getListCallPage(page,studentQueryWrapper);
         return listCallVoList;
     }
@@ -89,5 +92,10 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
     @Override
     public void addStudent(Student student) {
         studentDao.insert(student);
+    }
+
+    @Override
+    public void deleteStudent(Integer[] id) {
+        studentDao.deleteBatchIds(Arrays.asList(id));
     }
 }

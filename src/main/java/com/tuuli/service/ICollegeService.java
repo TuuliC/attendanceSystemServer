@@ -26,4 +26,6 @@ public interface ICollegeService extends IService<College> {
     College queryClassById(Integer id);
 
     void updateCollege(College college);
+
+    void deleteCollege(Integer[] id);
 }

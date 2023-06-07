@@ -14,11 +14,11 @@
             ${ew.customSqlSegment}
     </select>
     <select id="getListCallPage" resultType="com.tuuli.vo.ListCallVo">
-        SELECT student.stu_num num,
+        SELECT student.stu_num  num,
                student.stu_name name,
-               student.gender gender,
-               re.class_name className,
-               re.col_name college,
+               student.gender   gender,
+               re.cl_name       className,
+               re.col_name      college,
                re.status
         FROM tb_student student
                  LEFT JOIN record_detail re on student.stu_num = re.stu_num

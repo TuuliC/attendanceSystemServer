@@ -13,5 +13,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 设置字符串结果类型为VARCHAR
+#    use-column-label: true
   mapper-locations: classpath*:/mapper/*.xml
 

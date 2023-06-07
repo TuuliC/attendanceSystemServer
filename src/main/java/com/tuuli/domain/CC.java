@@ -17,8 +17,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("tb_sc")
-public class Sc implements Serializable {
+@TableName("tb_cc")
+public class CC implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,8 +28,8 @@ public class Sc implements Serializable {
     @TableField(value = "course_id")
     private Integer courseId;
 
-    @TableField(value = "stu_id")
-    private Integer stuId;
+    @TableField(value = "class_id")
+    private Integer classId;
 
     @TableLogic
     private Integer deleted;

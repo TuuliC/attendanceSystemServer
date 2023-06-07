@@ -5,15 +5,17 @@
     <select id="selectListPage" resultType="com.tuuli.vo.ClassVo">
         select class.id, class.cl_name className, count(student.id) stuCount, college.col_name college
         from tb_class class
-                 left join tb_college college on class.college_id = college.id
-                 left join tb_student student on class.id = student.class_id
+                 left join tb_college college
+                           on class.college_id = college.id
+                 left join tb_student student on class.id = student.class_id and student.deleted = 0
             ${ew.customSqlSegment}
         group by class.id, college.id
     </select>
     <select id="getAllClass" resultType="com.tuuli.vo.CollegeAndClassAndCourseVo">
         select class.id, cl_name name
         from tb_class class
-                 left join tb_college college on college.id = class.college_id
+                 left join tb_college college
+                           on college.id = class.college_id
             ${ew.customSqlSegment}
 
     </select>

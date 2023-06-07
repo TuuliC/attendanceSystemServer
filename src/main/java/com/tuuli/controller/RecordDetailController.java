@@ -29,9 +29,7 @@ public class RecordDetailController {
 
     @PostMapping("/getRecordPage")
     public R<List<RecordDetail>> getRecordPage(@RequestBody RecordDto recordDto){
-        //System.out.println("recordDto = " + recordDto);
         List<RecordDetail> recordDetailList = recordDetailService.getRecordPage(recordDto);
-        //System.out.println("recordDetailList = " + recordDetailList);
         return R.success(recordDetailList);
     }
 }

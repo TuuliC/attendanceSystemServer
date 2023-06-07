@@ -3,17 +3,13 @@ package com.tuuli.controller;
 
 import com.tuuli.common.R;
 import com.tuuli.domain.Classs;
-import com.tuuli.domain.Student;
 import com.tuuli.dto.ClassDto;
-import com.tuuli.dto.StudentDto;
 import com.tuuli.service.IClassService;
 import com.tuuli.vo.ClassVo;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
-import com.tuuli.vo.StudentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,6 +55,13 @@ public class ClassController {
     @PostMapping("/addClass")
     public R<String> addClass(@RequestBody Classs classs){
         classService.addClass(classs);
+        return R.success("success");
+    }
+
+    @PostMapping("/deleteClass")
+    public R<String> deleteClass(@RequestBody Integer[] id){
+        //System.out.println("id = " + Arrays.toString(id));
+        classService.deleteClass(id);
         return R.success("success");
     }
 

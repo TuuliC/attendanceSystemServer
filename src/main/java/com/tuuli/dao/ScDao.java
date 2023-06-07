@@ -1,6 +1,6 @@
 package com.tuuli.dao;
 
-import com.tuuli.domain.Sc;
+import com.tuuli.domain.CC;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,6 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2023-05-22
  */
 @Mapper
-public interface ScDao extends BaseMapper<Sc> {
+public interface ScDao extends BaseMapper<CC> {
 
 }

@@ -1,6 +1,6 @@
 package com.tuuli.service;
 
-import com.tuuli.domain.Sc;
+import com.tuuli.domain.CC;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author tuuli
  * @since 2023-05-22
  */
-public interface IScService extends IService<Sc> {
+public interface IScService extends IService<CC> {
 
 }

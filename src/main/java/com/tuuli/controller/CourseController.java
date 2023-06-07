@@ -2,8 +2,10 @@ package com.tuuli.controller;
 
 
 import com.tuuli.common.R;
+import com.tuuli.dto.CourseDto;
 import com.tuuli.service.ICourseService;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
+import com.tuuli.vo.CourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +32,18 @@ public class CourseController {
     public R<List<CollegeAndClassAndCourseVo>> getAllClass(@RequestBody Integer[] classId){
         List<CollegeAndClassAndCourseVo> courseVoList = courseService.getAllCourse(classId);
         return R.success(courseVoList);
+    }
+
+    @PostMapping("/getCoursePage")
+    public R<List<CourseVo>> getCoursePage(@RequestBody CourseDto courseDto){
+        List<CourseVo> courseVoList = courseService.getCoursePage(courseDto);
+        return R.success(courseVoList);
+    }
+
+    @GetMapping("/queryCourseById/{id}")
+    public R<CourseVo> queryCourseById(@PathVariable Integer id){
+        CourseVo courseVo = courseService.queryCourseById(id);
+        return R.success(courseVo);
     }
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,9 +35,7 @@ public class StudentController {
 
     @PostMapping("/getStudentPage")
     public R<List<StudentVo>> getStudentPage(@RequestBody StudentDto studentDto) {
-        //System.out.println("studentDto = " + studentDto);
         List<StudentVo> studentVoList = studentService.getStudentPage(studentDto);
-        //System.out.println("studentVoList = " + studentVoList);
         return R.success(studentVoList);
     }
 
@@ -48,24 +47,26 @@ public class StudentController {
 
     @GetMapping("/queryStudentById/{id}")
     public R<StudentVo> queryStudentById(@PathVariable Integer id){
-        //System.out.println("id = " + id);
         StudentVo studentVo = studentService.queryStudentById(id);
         return R.success(studentVo);
     }
 
     @PostMapping("/updateStudent")
     public R<String> updateStudent(@RequestBody Student student){
-        //System.out.println("addStudentDto = " + student);
         studentService.updateStudent(student);
         return R.success("success");
     }
 
     @PostMapping("/addStudent")
     public R<String> addStudent(@RequestBody Student student){
-        //System.out.println("student = " + student);
         studentService.addStudent(student);
         return R.success("success");
     }
 
+    @PostMapping("/deleteStudent")
+    public R<String> deleteStudent(@RequestBody Integer[] id){
+        studentService.deleteStudent(id);
+        return R.success("success");
+    }
 }
 

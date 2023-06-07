@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public class CollegeServiceImpl extends ServiceImpl<CollegeDao, College> impleme
     public List<CollegeVo> getCollegePage(CollegeDto collegeDto) {
         IPage<College> page = new Page<>(collegeDto.getPage(), collegeDto.getPageSize());
         QueryWrapper<College> classQueryWrapper = new QueryWrapper<>();
-        classQueryWrapper.eq("class.deleted",0).eq("college.deleted",0)
+        classQueryWrapper.eq("college.deleted",0)
                 .lambda().like(!StringUtils.isBlank(collegeDto.getName()),College::getCollegeName,collegeDto.getName());
         List<CollegeVo> collegeVoList = collegeDao.selectListPage(page, classQueryWrapper);
         return collegeVoList;
@@ -61,5 +62,10 @@ public class CollegeServiceImpl extends ServiceImpl<CollegeDao, College> impleme
     @Override
     public void updateCollege(College college) {
         collegeDao.updateById(college);
+    }
+
+    @Override
+    public void deleteCollege(Integer[] id) {
+        collegeDao.deleteBatchIds(Arrays.asList(id));
     }
 }
