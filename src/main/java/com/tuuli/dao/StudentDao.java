@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.tuuli.domain.Student;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.tuuli.vo.ListCallVo;
+import com.tuuli.vo.CallNameVo;
+import com.tuuli.vo.PageVo;
 import com.tuuli.vo.StudentVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -35,7 +36,11 @@ public interface StudentDao extends BaseMapper<Student> {
 //            "                 left join tb_college college on class.college_id = college.id #{ew.customSqlSegment}")
     List<StudentVo> selectListPage(IPage<Student> page, @Param(Constants.WRAPPER) QueryWrapper<Student> studentQueryWrapper);
 
-    List<ListCallVo> getListCallPage(IPage<Student> page, @Param(Constants.WRAPPER) QueryWrapper<Student> studentQueryWrapper);
+    Integer selectListPageCount(@Param(Constants.WRAPPER) QueryWrapper<Student> studentQueryWrapper);
+
+    List<CallNameVo> getListCallPage(IPage<Student> page, @Param(Constants.WRAPPER) QueryWrapper<Student> listCallDto);
+
+    Integer getListCallPageCount(@Param(Constants.WRAPPER) QueryWrapper<Student> listCallDto);
 
     @Select("SELECT s.stu_num num, s.stu_name name, s.gender, co.col_name  AS college, c.cl_name AS className\n" +
             "FROM tb_student s\n" +
@@ -43,4 +48,6 @@ public interface StudentDao extends BaseMapper<Student> {
             "JOIN tb_college co ON c.college_id = co.id \n" +
             "WHERE s.id = #{id}")
     StudentVo queryStudentById(Integer id);
+
+    List<CallNameVo> getRandomStuList(@Param(Constants.WRAPPER) QueryWrapper<Student> studentQueryWrapper);
 }

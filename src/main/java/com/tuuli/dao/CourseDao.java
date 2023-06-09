@@ -39,4 +39,6 @@ public interface CourseDao extends BaseMapper<Course> {
             "INNER JOIN tb_class cl ON cc.class_id = cl.id \n" +
             "WHERE c.id = #{id}")
     List<CollegeAndClassAndCourseVo> getSelectClassByCourseId(Integer id);
+
+    Integer getCoursePageCount(@Param(Constants.WRAPPER) QueryWrapper<Course> courseQueryWrapper);
 }

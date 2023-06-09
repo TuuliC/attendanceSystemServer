@@ -3,6 +3,7 @@ package com.tuuli.service;
 import com.tuuli.domain.RecordDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tuuli.dto.RecordDto;
+import com.tuuli.vo.PageVo;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ import java.util.List;
  */
 public interface IRecordDetailService extends IService<RecordDetail> {
 
-    List<RecordDetail> getRecordPage(RecordDto recordDto);
+    PageVo<RecordDetail> getRecordPage(RecordDto recordDto);
 }

@@ -17,4 +17,13 @@
         GROUP BY course.course_name
 
     </select>
+    <select id="getCoursePageCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM (SELECT course.id, course.course_name, GROUP_CONCAT(class.cl_name) AS classListStr, COUNT(class.id) AS classCount
+              FROM tb_course course
+                       LEFT JOIN tb_cc cc ON course.id = cc.course_id
+                       LEFT JOIN tb_class class ON cc.class_id = class.id
+                  ${ew.customSqlSegment}
+              GROUP BY course.course_name) as ccc
+    </select>
 </mapper>

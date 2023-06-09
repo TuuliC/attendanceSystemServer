@@ -10,6 +10,7 @@ import com.tuuli.service.ICourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
 import com.tuuli.vo.CourseVo;
+import com.tuuli.vo.PageVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,14 +40,18 @@ public class CourseServiceImpl extends ServiceImpl<CourseDao, Course> implements
     }
 
     @Override
-    public List<CourseVo> getCoursePage(CourseDto courseDto) {
+    public PageVo<CourseVo> getCoursePage(CourseDto courseDto) {
         //System.out.println("courseDto = " + courseDto);
         IPage<Course> page = new Page<>(courseDto.getPage(), courseDto.getPageSize());
         QueryWrapper<Course> courseQueryWrapper = new QueryWrapper<>();
         courseQueryWrapper.lambda().like(!StringUtils.isBlank(courseDto.getName()), Course::getCourseName, courseDto.getName());
         List<CourseVo> courseVoList = courseDao.getCoursePage(page, courseQueryWrapper);
-        //System.out.println("courseVoList = " + courseVoList);
-        return courseVoList;
+        Integer count = courseDao.getCoursePageCount( courseQueryWrapper);
+
+        PageVo<CourseVo> courseVoPageVo = new PageVo<>();
+        courseVoPageVo.setDataList(courseVoList);
+        courseVoPageVo.setCount(count);
+        return courseVoPageVo;
     }
 
     @Override

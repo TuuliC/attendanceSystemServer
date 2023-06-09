@@ -9,4 +9,12 @@
             ${ew.customSqlSegment}
         group by college.id
     </select>
+    <select id="selectListPageCount" resultType="java.lang.Integer">
+        select count(*)
+        from (select college.id, college.col_name as college, count(class.id) classCount
+              from tb_college college
+                       left join tb_class class on college.id = class.college_id and class.deleted = 0
+                  ${ew.customSqlSegment}
+              group by college.id) as iccC
+    </select>
 </mapper>

@@ -11,6 +11,7 @@ import com.tuuli.service.ICollegeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
 import com.tuuli.vo.CollegeVo;
+import com.tuuli.vo.PageVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,13 +40,18 @@ public class CollegeServiceImpl extends ServiceImpl<CollegeDao, College> impleme
     }
 
     @Override
-    public List<CollegeVo> getCollegePage(CollegeDto collegeDto) {
+    public PageVo<CollegeVo> getCollegePage(CollegeDto collegeDto) {
         IPage<College> page = new Page<>(collegeDto.getPage(), collegeDto.getPageSize());
         QueryWrapper<College> classQueryWrapper = new QueryWrapper<>();
         classQueryWrapper.eq("college.deleted",0)
                 .lambda().like(!StringUtils.isBlank(collegeDto.getName()),College::getCollegeName,collegeDto.getName());
         List<CollegeVo> collegeVoList = collegeDao.selectListPage(page, classQueryWrapper);
-        return collegeVoList;
+        Integer count = collegeDao.selectListPageCount( classQueryWrapper);
+
+        PageVo<CollegeVo> collegeVoPageVo = new PageVo<>();
+        collegeVoPageVo.setDataList(collegeVoList);
+        collegeVoPageVo.setCount(count);
+        return collegeVoPageVo;
     }
 
     @Override

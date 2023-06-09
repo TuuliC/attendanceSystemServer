@@ -3,18 +3,15 @@ package com.tuuli.controller;
 
 import com.tuuli.common.R;
 import com.tuuli.domain.Student;
-import com.tuuli.dto.AddStudentDto;
-import com.tuuli.dto.ListCallDto;
+import com.tuuli.dto.CallNameDto;
 import com.tuuli.dto.StudentDto;
 import com.tuuli.service.IStudentService;
-import com.tuuli.vo.ListCallVo;
+import com.tuuli.vo.CallNameVo;
+import com.tuuli.vo.PageVo;
 import com.tuuli.vo.StudentVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -34,15 +31,15 @@ public class StudentController {
     private IStudentService studentService;
 
     @PostMapping("/getStudentPage")
-    public R<List<StudentVo>> getStudentPage(@RequestBody StudentDto studentDto) {
-        List<StudentVo> studentVoList = studentService.getStudentPage(studentDto);
+    public R<PageVo<StudentVo>> getStudentPage(@RequestBody StudentDto studentDto) {
+        PageVo<StudentVo> studentVoList = studentService.getStudentPage(studentDto);
         return R.success(studentVoList);
     }
 
     @PostMapping("/getListCallPage")
-    public R<List<ListCallVo>> getListCallPage(@RequestBody ListCallDto listCallDto) {
-        List<ListCallVo> listCallVoList = studentService.getListCallPage(listCallDto);
-        return R.success(listCallVoList);
+    public R<PageVo<CallNameVo>> getListCallPage(@RequestBody CallNameDto callNameDto) {
+        PageVo<CallNameVo> listCallVoName = studentService.getListCallPage(callNameDto);
+        return R.success(listCallVoName);
     }
 
     @GetMapping("/queryStudentById/{id}")

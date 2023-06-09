@@ -13,16 +13,53 @@
                  left join tb_college college on class.college_id = college.id
             ${ew.customSqlSegment}
     </select>
-    <select id="getListCallPage" resultType="com.tuuli.vo.ListCallVo">
-        SELECT student.stu_num  num,
-               student.stu_name name,
-               student.gender   gender,
-               re.cl_name       className,
-               re.col_name      college,
-               re.status
-        FROM tb_student student
-                 LEFT JOIN record_detail re on student.stu_num = re.stu_num
+
+    <select id="selectListPageCount" resultType="java.lang.Integer">
+        select count(*)
+        from tb_student student
+                 left join tb_class class on student.class_id = class.id
+                 left join tb_college college on class.college_id = college.id
             ${ew.customSqlSegment}
     </select>
+
+    <select id="getListCallPage" resultType="com.tuuli.vo.CallNameVo">
+        SELECT student.id,
+               student.stu_num  num,
+               student.stu_name name,
+               student.gender,
+               class.cl_name    className,
+               college.col_name college,
+               record.status
+        FROM tb_student student
+                 JOIN tb_class class ON student.class_id = class.id
+                 JOIN tb_college college ON class.college_id = college.id
+                 JOIN tb_cc cc ON cc.class_id = class.id
+                 JOIN tb_course course ON course.id = cc.course_id
+                 LEFT JOIN tb_record record ON student.id = record.stu_id AND record.course_id = course.id
+            ${ew.customSqlSegment}
+    </select>
+
+    <select id="getListCallPageCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM tb_student student
+                 JOIN tb_class class ON student.class_id = class.id
+                 JOIN tb_college college ON class.college_id = college.id
+                 JOIN tb_cc cc ON cc.class_id = class.id
+                 JOIN tb_course course ON course.id = cc.course_id
+                 LEFT JOIN tb_record record ON student.id = record.stu_id AND record.course_id = course.id
+            ${ew.customSqlSegment}
+    </select>
+
+    <select id="getRandomStuList" resultType="com.tuuli.vo.CallNameVo">
+        SELECT student.id, student.stu_num num, student.stu_name name
+        FROM tb_student student
+                 JOIN tb_class class ON student.class_id = class.id
+                 JOIN tb_cc cc ON class.id = cc.class_id
+                 JOIN tb_course course ON cc.course_id = course.id
+            ${ew.customSqlSegment}
+        ORDER BY RAND()
+        LIMIT 20
+    </select>
+
 
 </mapper>

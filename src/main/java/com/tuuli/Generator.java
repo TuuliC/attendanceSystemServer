@@ -52,7 +52,7 @@ public class Generator {
         autoGenerator.setStrategy(strategyConfig);
 
         //执行生成操作
-        autoGenerator.execute();
+        //autoGenerator.execute();
     }
 
 }

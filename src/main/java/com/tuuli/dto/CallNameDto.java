@@ -1,5 +1,7 @@
 package com.tuuli.dto;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.tuuli.domain.Student;
 import lombok.Data;
 
 /**
@@ -8,7 +10,7 @@ import lombok.Data;
  * @description
  */
 @Data
-public class ListCallDto {
+public class CallNameDto {
     private Integer page;
     private Integer pageSize;
     private String name;

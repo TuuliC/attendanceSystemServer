@@ -5,6 +5,7 @@ import com.tuuli.common.R;
 import com.tuuli.domain.RecordDetail;
 import com.tuuli.dto.RecordDto;
 import com.tuuli.service.IRecordDetailService;
+import com.tuuli.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,8 @@ public class RecordDetailController {
     private IRecordDetailService recordDetailService;
 
     @PostMapping("/getRecordPage")
-    public R<List<RecordDetail>> getRecordPage(@RequestBody RecordDto recordDto){
-        List<RecordDetail> recordDetailList = recordDetailService.getRecordPage(recordDto);
+    public R<PageVo<RecordDetail>> getRecordPage(@RequestBody RecordDto recordDto){
+        PageVo<RecordDetail> recordDetailList = recordDetailService.getRecordPage(recordDto);
         return R.success(recordDetailList);
     }
 }

@@ -27,4 +27,6 @@ public interface CollegeDao extends BaseMapper<College> {
     List<CollegeAndClassAndCourseVo> getAllCollege();
 
     List<CollegeVo> selectListPage(IPage<College> page, @Param(Constants.WRAPPER) QueryWrapper<College> classQueryWrapper);
+
+    Integer selectListPageCount( @Param(Constants.WRAPPER) QueryWrapper<College> classQueryWrapper);
 }

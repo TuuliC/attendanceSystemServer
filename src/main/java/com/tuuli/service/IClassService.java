@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.tuuli.dto.ClassDto;
 import com.tuuli.vo.ClassVo;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
+import com.tuuli.vo.PageVo;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public interface IClassService extends IService<Classs> {
     List<CollegeAndClassAndCourseVo> getAllClass(Integer[] collegeId);
 
-    List<ClassVo> getClassPage(ClassDto classDto);
+    PageVo<ClassVo> getClassPage(ClassDto classDto);
 
     ClassVo queryClassById(Integer id);
 

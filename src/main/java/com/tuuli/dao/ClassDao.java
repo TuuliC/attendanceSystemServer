@@ -29,6 +29,8 @@ public interface ClassDao extends BaseMapper<Classs> {
 
     List<ClassVo> selectListPage(IPage<Classs> page, @Param(Constants.WRAPPER) QueryWrapper<Classs> classQueryWrapper);
 
+    Integer selectListPageCount(@Param(Constants.WRAPPER) QueryWrapper<Classs> classQueryWrapper);
+
     @Select("select class.cl_name className,college.col_name college " +
             "from tb_class class " +
             "left join tb_college college on college.id = class.college_id " +
@@ -36,4 +38,6 @@ public interface ClassDao extends BaseMapper<Classs> {
             "and class.deleted = 0 " +
             "and college.deleted = 0")
     ClassVo queryClassById(Integer id);
+
+
 }

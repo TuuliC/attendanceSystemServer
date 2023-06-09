@@ -11,6 +11,7 @@ import com.tuuli.service.IClassService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tuuli.vo.ClassVo;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
+import com.tuuli.vo.PageVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -37,20 +38,25 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
     public List<CollegeAndClassAndCourseVo> getAllClass(Integer[] collegeId) {
         QueryWrapper<Classs> classLambdaQueryWrapper = new QueryWrapper<>();
         classLambdaQueryWrapper.eq("class.deleted",0)
-                .lambda().in(collegeId != null, Classs::getCollegeId, Arrays.asList(collegeId));
+                .lambda().in(collegeId.length>0, Classs::getCollegeId, Arrays.asList(collegeId));
         List<CollegeAndClassAndCourseVo> classVoList = classDao.getAllClass(classLambdaQueryWrapper);
         return classVoList;
     }
 
     @Override
-    public List<ClassVo> getClassPage(ClassDto classDto) {
+    public PageVo<ClassVo> getClassPage(ClassDto classDto) {
         IPage<Classs> page = new Page<>(classDto.getPage(), classDto.getPageSize());
         QueryWrapper<Classs> classQueryWrapper = new QueryWrapper<>();
         classQueryWrapper.eq("class.deleted",0).eq("college.deleted",0)
                 .lambda().in(classDto.getCollegeList().length > 0, Classs::getCollegeId, Arrays.asList(classDto.getCollegeList()))
                 .like(!StringUtils.isBlank(classDto.getName()), Classs::getClassName, classDto.getName());
         List<ClassVo> classVoList = classDao.selectListPage(page, classQueryWrapper);
-        return classVoList;
+        Integer count = classDao.selectListPageCount(classQueryWrapper);
+
+        PageVo<ClassVo> classVoPageVo = new PageVo<>();
+        classVoPageVo.setDataList(classVoList);
+        classVoPageVo.setCount(count);
+        return classVoPageVo;
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.tuuli.dao.RecordDetailDao;
 import com.tuuli.dto.RecordDto;
 import com.tuuli.service.IRecordDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.tuuli.vo.PageVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
     private ClassDao classDao;
 
     @Override
-    public List<RecordDetail> getRecordPage(RecordDto recordDto) {
+    public PageVo<RecordDetail> getRecordPage(RecordDto recordDto) {
 
         //String courseName = null, collegeName = null, className = null;
         //recordDto获取的是id，需将id转为name
@@ -79,14 +80,17 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
 
         IPage<RecordDetail> page = new Page<>(recordDto.getPage(), recordDto.getPageSize());
         QueryWrapper<RecordDetail> recordQueryWrapper = new QueryWrapper<>();
-        recordQueryWrapper.in(recordDto.getClassList().length > 0, "recordDetail.class_name", className)
-                .in(recordDto.getCollegeList().length > 0, "recordDetail.col_name", collegeName)
-                .eq(recordDto.getCourseId() != null, "recordDetail.course_name", courseName);
-        recordQueryWrapper.and(!StringUtils.isBlank(recordDto.getName()), qw -> qw
-                .like("recordDetail.stu_name", recordDto.getName())
+        recordQueryWrapper.lambda().in(recordDto.getClassList().length > 0, RecordDetail::getClassName, className)
+                .in(recordDto.getCollegeList().length > 0, RecordDetail::getCollegeName, collegeName)
+                .eq(recordDto.getCourseId() != null, RecordDetail::getCourseName, courseName);
+        recordQueryWrapper.lambda().and(!StringUtils.isBlank(recordDto.getName()), qw -> qw
+                .like(RecordDetail::getName, recordDto.getName())
                 .or()
-                .like("recordDetail.stu_num", recordDto.getName()));
-        List<RecordDetail> recordDetailList = recordDetailDao.selectListPage(page, recordQueryWrapper);
-        return recordDetailList;
+                .like(RecordDetail::getNum, recordDto.getName()));
+        IPage<RecordDetail> recordDetailIPage = recordDetailDao.selectPage(page, recordQueryWrapper);
+        PageVo<RecordDetail> recordDetailPageVo = new PageVo<>();
+        recordDetailPageVo.setDataList(recordDetailIPage.getRecords());
+        recordDetailPageVo.setCount(recordDetailPageVo.getCount());
+        return recordDetailPageVo;
     }
 }

@@ -21,5 +21,5 @@ import java.util.List;
 @Mapper
 public interface RecordDetailDao extends BaseMapper<RecordDetail> {
 
-    List<RecordDetail> selectListPage(IPage<RecordDetail> page, @Param(Constants.WRAPPER) QueryWrapper<RecordDetail> studentQueryWrapper);
+    //List<RecordDetail> selectListPage(IPage<RecordDetail> page, @Param(Constants.WRAPPER) QueryWrapper<RecordDetail> studentQueryWrapper);
 }

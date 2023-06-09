@@ -9,6 +9,7 @@
                cl_name  className,
                recordDetail.col_name    collegeName,
                recordDetail.course_name courseName,
+               status,
                time
         from record_detail recordDetail
             ${ew.customSqlSegment}

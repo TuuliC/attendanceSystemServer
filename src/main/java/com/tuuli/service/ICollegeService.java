@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.tuuli.dto.CollegeDto;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
 import com.tuuli.vo.CollegeVo;
+import com.tuuli.vo.PageVo;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public interface ICollegeService extends IService<College> {
     List<CollegeAndClassAndCourseVo> getAllCollege();
 
-    List<CollegeVo> getCollegePage(CollegeDto collegeDto);
+    PageVo<CollegeVo> getCollegePage(CollegeDto collegeDto);
 
     void addCollege(College college);
 

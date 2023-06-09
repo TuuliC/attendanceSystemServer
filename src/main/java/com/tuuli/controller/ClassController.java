@@ -7,6 +7,7 @@ import com.tuuli.dto.ClassDto;
 import com.tuuli.service.IClassService;
 import com.tuuli.vo.ClassVo;
 import com.tuuli.vo.CollegeAndClassAndCourseVo;
+import com.tuuli.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,8 @@ public class ClassController {
     IClassService classService;
 
     @PostMapping("/getClassPage")
-    public R<List<ClassVo>> getClassPage(@RequestBody ClassDto classDto) {
-        List<ClassVo> classVoList = classService.getClassPage(classDto);
+    public R<PageVo<ClassVo>> getClassPage(@RequestBody ClassDto classDto) {
+        PageVo<ClassVo> classVoList = classService.getClassPage(classDto);
         return R.success(classVoList);
     }
 
