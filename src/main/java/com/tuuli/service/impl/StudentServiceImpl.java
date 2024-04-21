@@ -63,20 +63,12 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
         studentVoPageVo.setDataList(studentVoList);
         studentVoPageVo.setCount(count);
         return studentVoPageVo;
-
     }
 
     @Override
     public PageVo<CallNameVo> getListCallPage(CallNameDto callNameDto) {
-        System.out.println("---\nlistCallDto = " + callNameDto);
         IPage<Student> page = new Page<>(callNameDto.getPage(), callNameDto.getPageSize());
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-//        Course course = courseDao.selectOne(new LambdaQueryWrapper<Course>().select(Course::getCourseName).eq(Course::getId, listCallDto.getCourseId()));
-//        studentQueryWrapper.in(listCallDto.getClassList().length>0,"student.class_id",Arrays.asList(listCallDto.getClassList()))
-//                .eq("re.course_name",course.getCourseName())
-//                .eq(!StringUtils.isBlank(listCallDto.getGender()),"student.gender",listCallDto.getGender())
-//                .like(!StringUtils.isBlank(listCallDto.getName()),"student.name",listCallDto.getName())
-//                .in(listCallDto.getStateList().length>0,"re.status",Arrays.asList(listCallDto.getStateList()));
         studentQueryWrapper.eq("course.id", callNameDto.getCourseId())
                 .eq(!StringUtils.isBlank(callNameDto.getGender()),"student.gender", callNameDto.getGender())
                 .eq("student.deleted", 0)
@@ -97,8 +89,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
 
     @Override
     public StudentVo queryStudentById(Integer id) {
-        StudentVo studentVo = studentDao.queryStudentById(id);
-        return studentVo;
+        return studentDao.queryStudentById(id);
     }
 
     @Override

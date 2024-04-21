@@ -46,8 +46,6 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
 
     @Override
     public PageVo<RecordDetail> getRecordPage(RecordDto recordDto) {
-
-        //String courseName = null, collegeName = null, className = null;
         //recordDto获取的是id，需将id转为name
         String courseName = null;
         ArrayList<String> collegeName = new ArrayList<>(), className = new ArrayList<>();
@@ -61,7 +59,6 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
             LambdaQueryWrapper<College> collegeLambdaQueryWrapper = new LambdaQueryWrapper<>();
             collegeLambdaQueryWrapper.select(College::getCollegeName).in(College::getId, Arrays.asList(recordDto.getCollegeList()));
             List<College> collegeList = collegeDao.selectList(collegeLambdaQueryWrapper);
-            //collegeName = college.getName();
             for (College c : collegeList
             ) {
                 collegeName.add(c.getCollegeName());
@@ -71,7 +68,6 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
             LambdaQueryWrapper<Classs> classLambdaQueryWrapper = new LambdaQueryWrapper<>();
             classLambdaQueryWrapper.select(Classs::getClassName).in(Classs::getId, Arrays.asList(recordDto.getClassList()));
             List<Classs> classList = classDao.selectList(classLambdaQueryWrapper);
-//            className = classs.getClassName();
             for (Classs c : classList
             ) {
                 className.add(c.getClassName());

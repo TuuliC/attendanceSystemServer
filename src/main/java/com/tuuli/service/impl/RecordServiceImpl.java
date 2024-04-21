@@ -38,7 +38,6 @@ public class RecordServiceImpl extends ServiceImpl<RecordDao, Record> implements
 
     @Override
     public void markAttendance(ListAttendanceDto listAttendanceDto) {
-        //System.out.println("listAttendanceVo = " + listAttendanceDto);
         Record newRecord = new Record();
         for (int i = 0; i < listAttendanceDto.getIds().length; i++) {
             Integer studentId = listAttendanceDto.getIds()[i];
@@ -46,6 +45,7 @@ public class RecordServiceImpl extends ServiceImpl<RecordDao, Record> implements
             newRecord.setCourseId(listAttendanceDto.getCourseId());
             newRecord.setStatus(listAttendanceDto.getStatus());
             newRecord.setTime(new Timestamp(new Date().getTime()));
+            //查询该学生是否已点名，若已点名，则更新记录，若未点名，则添加记录
             LambdaQueryWrapper<Record> eq = new QueryWrapper<Record>().lambda().
                     eq(Record::getStuId, studentId).eq(Record::getCourseId, listAttendanceDto.getCourseId());
             Record oldRecord = recordDao.selectOne(eq);
@@ -53,20 +53,16 @@ public class RecordServiceImpl extends ServiceImpl<RecordDao, Record> implements
                 recordDao.insert(newRecord);
             else
                 recordDao.update(newRecord, eq);
-
-
         }
     }
 
     @Override
     public List<CallNameVo> randomAttendance(CallNameDto callNameDto) {
-        //System.out.println("callNameDto = " + callNameDto);
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
         studentQueryWrapper.in("class.id", Arrays.asList(callNameDto.getClassList()))
                 .eq("course.id", callNameDto.getCourseId())
                 .eq("student.deleted", 0);
         List<CallNameVo> callNameVoList = studentDao.getRandomStuList(studentQueryWrapper);
-        //System.out.println("callNameVoList = " + callNameVoList);
         //查询0号学生的点名状态
         LambdaQueryWrapper<Record> recordLambdaQueryWrapper = new LambdaQueryWrapper<>();
         recordLambdaQueryWrapper.select(Record::getStatus)
@@ -74,7 +70,6 @@ public class RecordServiceImpl extends ServiceImpl<RecordDao, Record> implements
                 .eq(Record::getCourseId, callNameDto.getCourseId());
         Record record = recordDao.selectOne(recordLambdaQueryWrapper);
         callNameVoList.get(0).setStatus(record==null?null:record.getStatus());
-        //System.out.println("callNameVoList = " + callNameVoList);
         return callNameVoList;
     }
 }
