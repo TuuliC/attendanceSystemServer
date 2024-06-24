@@ -11,5 +11,6 @@ import lombok.Data;
 public class ListAttendanceDto {
     private Integer[] ids;
     private Integer courseId;
+    private Integer classsId;
     private String status;
 }

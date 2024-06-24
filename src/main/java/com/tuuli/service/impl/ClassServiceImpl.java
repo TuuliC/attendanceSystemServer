@@ -36,10 +36,13 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
 
     @Override
     public List<CollegeAndClassAndCourseVo> getAllClass(Integer[] collegeId) {
+        System.out.println(collegeId.length);
+        System.out.println(collegeId[0]);
         QueryWrapper<Classs> classLambdaQueryWrapper = new QueryWrapper<>();
-        classLambdaQueryWrapper.eq("class.deleted",0)
-                .lambda().in(collegeId.length>0, Classs::getCollegeId, Arrays.asList(collegeId));
+        classLambdaQueryWrapper.eq("class.deleted", 0)
+                .lambda().in(collegeId.length > 0 && collegeId[0] != null, Classs::getCollegeId, Arrays.asList(collegeId));
         List<CollegeAndClassAndCourseVo> classVoList = classDao.getAllClass(classLambdaQueryWrapper);
+        System.out.println(classVoList);
         return classVoList;
     }
 
@@ -47,7 +50,7 @@ public class ClassServiceImpl extends ServiceImpl<ClassDao, Classs> implements I
     public PageVo<ClassVo> getClassPage(ClassDto classDto) {
         IPage<Classs> page = new Page<>(classDto.getPage(), classDto.getPageSize());
         QueryWrapper<Classs> classQueryWrapper = new QueryWrapper<>();
-        classQueryWrapper.eq("class.deleted",0).eq("college.deleted",0)
+        classQueryWrapper.eq("class.deleted", 0).eq("college.deleted", 0)
                 .lambda().in(classDto.getCollegeList().length > 0, Classs::getCollegeId, Arrays.asList(classDto.getCollegeList()))
                 .like(!StringUtils.isBlank(classDto.getName()), Classs::getClassName, classDto.getName());
         List<ClassVo> classVoList = classDao.selectListPage(page, classQueryWrapper);

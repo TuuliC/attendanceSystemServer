@@ -31,6 +31,9 @@ public class CC implements Serializable {
     @TableField(value = "class_id")
     private Integer classId;
 
+    @TableField(value = "status")
+    private Integer status;
+
     @TableLogic
     private Integer deleted;
 

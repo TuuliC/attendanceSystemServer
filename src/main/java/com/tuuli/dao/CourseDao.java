@@ -33,7 +33,7 @@ public interface CourseDao extends BaseMapper<Course> {
 
     List<CourseVo> getCoursePage(IPage<Course> page, @Param(Constants.WRAPPER) QueryWrapper<Course> queryWrapper);
 
-    @Select("SELECT cl.id, cl.cl_name\n" +
+    @Select("SELECT cl.id, cl.cl_name name\n" +
             "FROM tb_course c\n" +
             "INNER JOIN tb_cc cc ON c.id = cc.course_id \n" +
             "INNER JOIN tb_class cl ON cc.class_id = cl.id \n" +

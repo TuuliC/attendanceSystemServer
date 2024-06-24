@@ -61,6 +61,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseDao, Course> implements
         CourseVo courseVo = new CourseVo();
         courseVo.setCourseName(course.getCourseName());
         courseVo.setSelectClassList(courseVoList);
+        System.out.println("courseVo = " + courseVo);
         return courseVo;
     }
 }

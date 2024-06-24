@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 21/04/2024 12:10:08
+ Date: 24/06/2024 23:52:44
 */
 
 SET NAMES utf8mb4;
@@ -25,93 +25,94 @@ CREATE TABLE `tb_cc`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `course_id` int NOT NULL,
   `class_id` int NOT NULL,
+  `status` int NOT NULL DEFAULT 0 COMMENT '0为未签到，1为正在签到',
   `deleted` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id` ASC) USING BTREE,
   INDEX `cls_id`(`class_id` ASC) USING BTREE,
   CONSTRAINT `cls_id` FOREIGN KEY (`class_id`) REFERENCES `tb_class` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `course_id` FOREIGN KEY (`course_id`) REFERENCES `tb_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 82 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_cc
 -- ----------------------------
-INSERT INTO `tb_cc` VALUES (5, 1, 1, 0);
-INSERT INTO `tb_cc` VALUES (6, 1, 4, 0);
-INSERT INTO `tb_cc` VALUES (7, 1, 7, 0);
-INSERT INTO `tb_cc` VALUES (8, 1, 8, 0);
-INSERT INTO `tb_cc` VALUES (9, 2, 1, 0);
-INSERT INTO `tb_cc` VALUES (10, 2, 4, 0);
-INSERT INTO `tb_cc` VALUES (11, 3, 1, 0);
-INSERT INTO `tb_cc` VALUES (12, 3, 4, 0);
-INSERT INTO `tb_cc` VALUES (13, 3, 7, 0);
-INSERT INTO `tb_cc` VALUES (14, 3, 8, 0);
-INSERT INTO `tb_cc` VALUES (17, 4, 1, 0);
-INSERT INTO `tb_cc` VALUES (18, 4, 4, 0);
-INSERT INTO `tb_cc` VALUES (19, 5, 1, 0);
-INSERT INTO `tb_cc` VALUES (20, 5, 4, 0);
-INSERT INTO `tb_cc` VALUES (21, 5, 7, 0);
-INSERT INTO `tb_cc` VALUES (22, 5, 8, 0);
-INSERT INTO `tb_cc` VALUES (23, 5, 9, 0);
-INSERT INTO `tb_cc` VALUES (24, 5, 10, 0);
-INSERT INTO `tb_cc` VALUES (25, 5, 13, 0);
-INSERT INTO `tb_cc` VALUES (26, 5, 14, 0);
-INSERT INTO `tb_cc` VALUES (27, 6, 1, 0);
-INSERT INTO `tb_cc` VALUES (28, 6, 4, 0);
-INSERT INTO `tb_cc` VALUES (29, 6, 9, 0);
-INSERT INTO `tb_cc` VALUES (30, 6, 10, 0);
-INSERT INTO `tb_cc` VALUES (31, 6, 11, 0);
-INSERT INTO `tb_cc` VALUES (32, 6, 12, 0);
-INSERT INTO `tb_cc` VALUES (33, 6, 13, 0);
-INSERT INTO `tb_cc` VALUES (34, 6, 14, 0);
-INSERT INTO `tb_cc` VALUES (35, 7, 1, 0);
-INSERT INTO `tb_cc` VALUES (36, 7, 4, 0);
-INSERT INTO `tb_cc` VALUES (37, 7, 7, 0);
-INSERT INTO `tb_cc` VALUES (38, 7, 8, 0);
-INSERT INTO `tb_cc` VALUES (39, 7, 9, 0);
-INSERT INTO `tb_cc` VALUES (40, 7, 10, 0);
-INSERT INTO `tb_cc` VALUES (41, 7, 11, 0);
-INSERT INTO `tb_cc` VALUES (42, 7, 12, 0);
-INSERT INTO `tb_cc` VALUES (43, 7, 13, 0);
-INSERT INTO `tb_cc` VALUES (44, 7, 14, 0);
-INSERT INTO `tb_cc` VALUES (45, 7, 15, 0);
-INSERT INTO `tb_cc` VALUES (46, 7, 16, 0);
-INSERT INTO `tb_cc` VALUES (47, 8, 13, 0);
-INSERT INTO `tb_cc` VALUES (48, 8, 14, 0);
-INSERT INTO `tb_cc` VALUES (49, 8, 15, 0);
-INSERT INTO `tb_cc` VALUES (50, 8, 16, 0);
-INSERT INTO `tb_cc` VALUES (51, 9, 15, 0);
-INSERT INTO `tb_cc` VALUES (52, 9, 16, 0);
-INSERT INTO `tb_cc` VALUES (53, 10, 21, 0);
-INSERT INTO `tb_cc` VALUES (54, 10, 22, 0);
-INSERT INTO `tb_cc` VALUES (55, 10, 23, 0);
-INSERT INTO `tb_cc` VALUES (56, 10, 24, 0);
-INSERT INTO `tb_cc` VALUES (57, 11, 17, 0);
-INSERT INTO `tb_cc` VALUES (58, 11, 18, 0);
-INSERT INTO `tb_cc` VALUES (59, 21, 19, 0);
-INSERT INTO `tb_cc` VALUES (60, 21, 20, 0);
-INSERT INTO `tb_cc` VALUES (61, 22, 19, 0);
-INSERT INTO `tb_cc` VALUES (62, 22, 20, 0);
-INSERT INTO `tb_cc` VALUES (63, 23, 19, 0);
-INSERT INTO `tb_cc` VALUES (64, 23, 20, 0);
-INSERT INTO `tb_cc` VALUES (65, 24, 19, 0);
-INSERT INTO `tb_cc` VALUES (66, 24, 20, 0);
-INSERT INTO `tb_cc` VALUES (67, 25, 21, 0);
-INSERT INTO `tb_cc` VALUES (68, 25, 22, 0);
-INSERT INTO `tb_cc` VALUES (69, 25, 23, 0);
-INSERT INTO `tb_cc` VALUES (70, 25, 24, 0);
-INSERT INTO `tb_cc` VALUES (71, 26, 21, 0);
-INSERT INTO `tb_cc` VALUES (72, 26, 22, 0);
-INSERT INTO `tb_cc` VALUES (73, 26, 23, 0);
-INSERT INTO `tb_cc` VALUES (74, 26, 24, 0);
-INSERT INTO `tb_cc` VALUES (75, 27, 21, 0);
-INSERT INTO `tb_cc` VALUES (76, 27, 22, 0);
-INSERT INTO `tb_cc` VALUES (77, 27, 23, 0);
-INSERT INTO `tb_cc` VALUES (78, 27, 24, 0);
-INSERT INTO `tb_cc` VALUES (79, 28, 21, 0);
-INSERT INTO `tb_cc` VALUES (80, 28, 22, 0);
-INSERT INTO `tb_cc` VALUES (81, 28, 23, 0);
-INSERT INTO `tb_cc` VALUES (82, 28, 24, 0);
+INSERT INTO `tb_cc` VALUES (5, 1, 1, 0, 0);
+INSERT INTO `tb_cc` VALUES (6, 1, 4, 0, 0);
+INSERT INTO `tb_cc` VALUES (7, 1, 7, 0, 0);
+INSERT INTO `tb_cc` VALUES (8, 1, 8, 0, 0);
+INSERT INTO `tb_cc` VALUES (9, 2, 1, 0, 0);
+INSERT INTO `tb_cc` VALUES (10, 2, 4, 0, 0);
+INSERT INTO `tb_cc` VALUES (11, 3, 1, 0, 0);
+INSERT INTO `tb_cc` VALUES (12, 3, 4, 0, 0);
+INSERT INTO `tb_cc` VALUES (13, 3, 7, 0, 0);
+INSERT INTO `tb_cc` VALUES (14, 3, 8, 0, 0);
+INSERT INTO `tb_cc` VALUES (17, 4, 1, 0, 0);
+INSERT INTO `tb_cc` VALUES (18, 4, 4, 0, 0);
+INSERT INTO `tb_cc` VALUES (19, 5, 1, 0, 0);
+INSERT INTO `tb_cc` VALUES (20, 5, 4, 0, 0);
+INSERT INTO `tb_cc` VALUES (21, 5, 7, 0, 0);
+INSERT INTO `tb_cc` VALUES (22, 5, 8, 0, 0);
+INSERT INTO `tb_cc` VALUES (23, 5, 9, 0, 0);
+INSERT INTO `tb_cc` VALUES (24, 5, 10, 0, 0);
+INSERT INTO `tb_cc` VALUES (25, 5, 13, 0, 0);
+INSERT INTO `tb_cc` VALUES (26, 5, 14, 0, 0);
+INSERT INTO `tb_cc` VALUES (27, 6, 1, 0, 0);
+INSERT INTO `tb_cc` VALUES (28, 6, 4, 0, 0);
+INSERT INTO `tb_cc` VALUES (29, 6, 9, 0, 0);
+INSERT INTO `tb_cc` VALUES (30, 6, 10, 0, 0);
+INSERT INTO `tb_cc` VALUES (31, 6, 11, 0, 0);
+INSERT INTO `tb_cc` VALUES (32, 6, 12, 0, 0);
+INSERT INTO `tb_cc` VALUES (33, 6, 13, 0, 0);
+INSERT INTO `tb_cc` VALUES (34, 6, 14, 0, 0);
+INSERT INTO `tb_cc` VALUES (35, 7, 1, 0, 0);
+INSERT INTO `tb_cc` VALUES (36, 7, 4, 0, 0);
+INSERT INTO `tb_cc` VALUES (37, 7, 7, 0, 0);
+INSERT INTO `tb_cc` VALUES (38, 7, 8, 0, 0);
+INSERT INTO `tb_cc` VALUES (39, 7, 9, 0, 0);
+INSERT INTO `tb_cc` VALUES (40, 7, 10, 0, 0);
+INSERT INTO `tb_cc` VALUES (41, 7, 11, 0, 0);
+INSERT INTO `tb_cc` VALUES (42, 7, 12, 0, 0);
+INSERT INTO `tb_cc` VALUES (43, 7, 13, 0, 0);
+INSERT INTO `tb_cc` VALUES (44, 7, 14, 0, 0);
+INSERT INTO `tb_cc` VALUES (45, 7, 15, 0, 0);
+INSERT INTO `tb_cc` VALUES (46, 7, 16, 0, 0);
+INSERT INTO `tb_cc` VALUES (47, 8, 13, 0, 0);
+INSERT INTO `tb_cc` VALUES (48, 8, 14, 0, 0);
+INSERT INTO `tb_cc` VALUES (49, 8, 15, 0, 0);
+INSERT INTO `tb_cc` VALUES (50, 8, 16, 0, 0);
+INSERT INTO `tb_cc` VALUES (51, 9, 15, 0, 0);
+INSERT INTO `tb_cc` VALUES (52, 9, 16, 0, 0);
+INSERT INTO `tb_cc` VALUES (53, 10, 21, 0, 0);
+INSERT INTO `tb_cc` VALUES (54, 10, 22, 0, 0);
+INSERT INTO `tb_cc` VALUES (55, 10, 23, 0, 0);
+INSERT INTO `tb_cc` VALUES (56, 10, 24, 0, 0);
+INSERT INTO `tb_cc` VALUES (57, 11, 17, 0, 0);
+INSERT INTO `tb_cc` VALUES (58, 11, 18, 0, 0);
+INSERT INTO `tb_cc` VALUES (59, 21, 19, 0, 0);
+INSERT INTO `tb_cc` VALUES (60, 21, 20, 0, 0);
+INSERT INTO `tb_cc` VALUES (61, 22, 19, 0, 0);
+INSERT INTO `tb_cc` VALUES (62, 22, 20, 0, 0);
+INSERT INTO `tb_cc` VALUES (63, 23, 19, 0, 0);
+INSERT INTO `tb_cc` VALUES (64, 23, 20, 0, 0);
+INSERT INTO `tb_cc` VALUES (65, 24, 19, 0, 0);
+INSERT INTO `tb_cc` VALUES (66, 24, 20, 0, 0);
+INSERT INTO `tb_cc` VALUES (67, 25, 21, 0, 0);
+INSERT INTO `tb_cc` VALUES (68, 25, 22, 0, 0);
+INSERT INTO `tb_cc` VALUES (69, 25, 23, 0, 0);
+INSERT INTO `tb_cc` VALUES (70, 25, 24, 0, 0);
+INSERT INTO `tb_cc` VALUES (71, 26, 21, 0, 0);
+INSERT INTO `tb_cc` VALUES (72, 26, 22, 0, 0);
+INSERT INTO `tb_cc` VALUES (73, 26, 23, 0, 0);
+INSERT INTO `tb_cc` VALUES (74, 26, 24, 0, 0);
+INSERT INTO `tb_cc` VALUES (75, 27, 21, 0, 0);
+INSERT INTO `tb_cc` VALUES (76, 27, 22, 0, 0);
+INSERT INTO `tb_cc` VALUES (77, 27, 23, 0, 0);
+INSERT INTO `tb_cc` VALUES (78, 27, 24, 0, 0);
+INSERT INTO `tb_cc` VALUES (79, 28, 21, 0, 0);
+INSERT INTO `tb_cc` VALUES (80, 28, 22, 0, 0);
+INSERT INTO `tb_cc` VALUES (81, 28, 23, 0, 0);
+INSERT INTO `tb_cc` VALUES (82, 28, 24, 0, 0);
 
 -- ----------------------------
 -- Table structure for tb_class
@@ -125,7 +126,7 @@ CREATE TABLE `tb_class`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `college_id`(`college_id` ASC) USING BTREE,
   CONSTRAINT `college_id` FOREIGN KEY (`college_id`) REFERENCES `tb_college` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_class
@@ -161,7 +162,7 @@ CREATE TABLE `tb_college`  (
   `col_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `deleted` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_college
@@ -183,7 +184,7 @@ CREATE TABLE `tb_course`  (
   `course_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `deleted` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_course
@@ -216,7 +217,7 @@ CREATE TABLE `tb_record`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `stu_id` int NOT NULL,
   `course_id` int NOT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'absent/attended/其它为未签到',
   `time` datetime NOT NULL,
   `deleted` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
@@ -224,18 +225,31 @@ CREATE TABLE `tb_record`  (
   INDEX `cour_id`(`course_id` ASC) USING BTREE,
   CONSTRAINT `cour_id` FOREIGN KEY (`course_id`) REFERENCES `tb_course` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `stu_id` FOREIGN KEY (`stu_id`) REFERENCES `tb_student` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 150 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_record
 -- ----------------------------
-INSERT INTO `tb_record` VALUES (22, 127, 1, 'absent', '2023-06-09 16:24:49', 0);
-INSERT INTO `tb_record` VALUES (23, 122, 2, 'attended', '2023-06-20 19:49:36', 0);
-INSERT INTO `tb_record` VALUES (24, 63, 2, 'attended', '2023-06-20 19:52:32', 0);
-INSERT INTO `tb_record` VALUES (25, 39, 1, 'attended', '2023-06-20 19:59:48', 0);
-INSERT INTO `tb_record` VALUES (26, 40, 1, 'attended', '2023-06-20 20:00:03', 0);
-INSERT INTO `tb_record` VALUES (27, 41, 1, 'attended', '2023-06-20 20:00:03', 0);
-INSERT INTO `tb_record` VALUES (28, 42, 1, 'attended', '2023-06-20 20:00:03', 0);
+INSERT INTO `tb_record` VALUES (130, 2, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (131, 3, 1, 'attended', '2024-06-24 14:19:51', 0);
+INSERT INTO `tb_record` VALUES (132, 4, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (133, 5, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (134, 6, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (135, 7, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (136, 8, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (137, 9, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (138, 10, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (139, 11, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (140, 12, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (141, 13, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (142, 14, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (143, 15, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (144, 16, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (145, 17, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (146, 18, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (147, 19, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (148, 20, 1, 'absent', '2024-06-24 14:19:57', 0);
+INSERT INTO `tb_record` VALUES (149, 21, 1, 'absent', '2024-06-24 14:19:57', 0);
 
 -- ----------------------------
 -- Table structure for tb_student
@@ -243,6 +257,7 @@ INSERT INTO `tb_record` VALUES (28, 42, 1, 'attended', '2023-06-20 20:00:03', 0)
 DROP TABLE IF EXISTS `tb_student`;
 CREATE TABLE `tb_student`  (
   `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NULL DEFAULT NULL,
   `stu_num` int NOT NULL,
   `stu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
@@ -250,235 +265,352 @@ CREATE TABLE `tb_student`  (
   `deleted` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `class_id`(`class_id` ASC) USING BTREE,
-  CONSTRAINT `class_id` FOREIGN KEY (`class_id`) REFERENCES `tb_class` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 291 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  INDEX `user_id`(`user_id` ASC) USING BTREE,
+  CONSTRAINT `class_id` FOREIGN KEY (`class_id`) REFERENCES `tb_class` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `tb_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 292 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_student
 -- ----------------------------
-INSERT INTO `tb_student` VALUES (39, 100000001, '<script>alert(1)</script>', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (40, 100000002, '李四', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (41, 100000003, '王五', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (42, 100000004, '赵六', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (43, 100000005, '刘七', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (44, 100000006, '陈八', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (45, 100000007, '张九', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (46, 100000008, '李十', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (47, 100000009, '王鑫', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (48, 100000010, '赵琳', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (49, 100000011, '刘涛', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (50, 100000012, '陈秀', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (51, 100000013, '张辉', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (52, 100000014, '李明', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (53, 100000015, '王华', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (54, 100000016, '赵燕', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (55, 100000017, '刘宇', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (56, 100000018, '陈婷', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (57, 100000019, '张伟', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (58, 100000020, '李丽', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (59, 100000021, '王飞', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (60, 100000022, '赵军', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (61, 100000023, '刘霞', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (62, 100000024, '陈杰', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (63, 100000025, '张艳', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (64, 100000026, '李辉', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (65, 100000027, '王明', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (66, 100000028, '赵华', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (67, 100000029, '刘宏', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (68, 100000030, '陈娟', '女', 1, 0);
-INSERT INTO `tb_student` VALUES (99, 101000001, '张三', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (100, 101000002, '李四', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (101, 101000003, '王五', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (102, 101000004, '赵六', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (103, 101000005, '刘七', '男', 4, 1);
-INSERT INTO `tb_student` VALUES (104, 101000006, '陈八', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (105, 101000007, '张九', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (106, 101000008, '李十', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (107, 101000009, '王鑫', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (108, 101000010, '赵琳', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (109, 101000011, '刘涛', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (110, 101000012, '陈秀', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (111, 101000013, '张辉', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (112, 101000014, '李明', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (113, 101000015, '王华', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (114, 101000016, '赵燕', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (115, 101000017, '刘宇', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (116, 101000018, '陈婷', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (117, 101000019, '张伟', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (118, 101000020, '李丽', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (119, 101000021, '王飞', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (120, 101000022, '赵军', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (121, 101000023, '刘霞', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (122, 101000024, '陈杰', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (123, 101000025, '张艳', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (124, 101000026, '李辉', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (125, 101000027, '王明', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (126, 101000028, '赵华', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (127, 101000029, '刘宏', '男', 4, 0);
-INSERT INTO `tb_student` VALUES (128, 101000030, '陈娟', '女', 4, 0);
-INSERT INTO `tb_student` VALUES (129, 103000001, '张三', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (130, 103000002, '李四', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (131, 103000003, '王五', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (132, 103000004, '赵六', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (133, 103000005, '刘七', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (134, 103000006, '陈八', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (135, 103000007, '张九', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (136, 103000008, '王二', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (137, 103000009, '李十', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (138, 103000010, '赵一', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (139, 103000011, '钱六', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (140, 103000012, '孙七', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (141, 103000013, '李八', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (142, 103000014, '周九', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (143, 103000015, '吴十', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (144, 103000016, '郑一', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (145, 103000017, '王六', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (146, 103000018, '赵七', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (147, 103000019, '钱八', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (148, 103000020, '孙九', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (149, 103000021, '李十', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (150, 103000022, '周一', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (151, 103000023, '吴六', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (152, 103000024, '郑七', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (153, 103000025, '王八', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (154, 103000026, '赵九', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (155, 103000027, '钱十', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (156, 103000028, '孙一', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (157, 103000029, '李六', '男', 7, 0);
-INSERT INTO `tb_student` VALUES (158, 103000030, '周七', '女', 7, 0);
-INSERT INTO `tb_student` VALUES (159, 104000001, '张三', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (160, 104000002, '李四', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (161, 104000003, '王五', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (162, 104000004, '赵六', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (163, 104000005, '刘七', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (164, 104000006, '陈八', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (165, 104000007, '张九', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (166, 104000008, '王二', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (167, 104000009, '李十', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (168, 104000010, '赵一', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (169, 104000011, '钱六', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (170, 104000012, '孙七', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (171, 104000013, '李八', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (172, 104000014, '周九', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (173, 104000015, '吴十', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (174, 104000016, '郑一', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (175, 104000017, '王六', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (176, 104000018, '赵七', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (177, 104000019, '钱八', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (178, 104000020, '孙九', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (179, 104000021, '李十', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (180, 104000022, '周一', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (181, 104000023, '吴六', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (182, 104000024, '郑七', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (183, 104000025, '王八', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (184, 104000026, '赵九', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (185, 104000027, '钱十', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (186, 104000028, '孙一', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (187, 104000029, '李六', '男', 8, 0);
-INSERT INTO `tb_student` VALUES (188, 104000030, '周七', '女', 8, 0);
-INSERT INTO `tb_student` VALUES (189, 110000001, '张三', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (190, 110000002, '李四', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (191, 110000003, '王五', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (192, 110000004, '赵六', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (193, 110000005, '刘七', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (194, 110000006, '陈八', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (195, 110000007, '张九', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (196, 110000008, '王二', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (197, 110000009, '李十', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (198, 110000010, '赵一', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (199, 110000011, '钱六', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (200, 110000012, '孙七', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (201, 110000013, '李八', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (202, 110000014, '周九', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (203, 110000015, '吴十', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (204, 110000016, '郑一', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (205, 110000017, '王六', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (206, 110000018, '赵七', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (207, 110000019, '钱八', '男', 9, 0);
-INSERT INTO `tb_student` VALUES (208, 110000020, '孙九', '女', 9, 0);
-INSERT INTO `tb_student` VALUES (209, 110000021, '张三', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (210, 110000022, '李四', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (211, 110000023, '王五', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (212, 110000024, '赵六', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (213, 110000025, '刘七', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (214, 110000026, '陈八', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (215, 110000027, '张九', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (216, 110000028, '王二', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (217, 110000029, '李十', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (218, 110000030, '赵一', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (219, 110000031, '钱六', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (220, 110000032, '孙七', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (221, 110000033, '李八', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (222, 110000034, '周九', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (223, 110000035, '吴十', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (224, 110000036, '郑一', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (225, 110000037, '王六', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (226, 110000038, '赵七', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (227, 110000039, '钱八', '男', 10, 0);
-INSERT INTO `tb_student` VALUES (228, 110000040, '孙九', '女', 10, 0);
-INSERT INTO `tb_student` VALUES (229, 112000001, '张三', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (230, 112000002, '李四', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (231, 112000003, '王五', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (232, 112000004, '赵六', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (233, 112000005, '刘七', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (234, 112000006, '陈八', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (235, 112000007, '张九', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (236, 112000008, '王二', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (237, 112000009, '李十', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (238, 112000010, '赵一', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (239, 112000011, '钱六', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (240, 112000012, '孙七', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (241, 112000013, '李八', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (242, 112000014, '周九', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (243, 112000015, '吴十', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (244, 112000016, '郑一', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (245, 112000017, '王六', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (246, 112000018, '赵七', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (247, 112000019, '钱八', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (248, 112000020, '孙九', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (249, 112000021, '张三', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (250, 112000022, '李四', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (251, 112000023, '王五', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (252, 112000024, '赵六', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (253, 112000025, '刘七', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (254, 112000026, '陈八', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (255, 112000027, '张九', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (256, 112000028, '王二', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (257, 112000029, '李十', '男', 11, 0);
-INSERT INTO `tb_student` VALUES (258, 112000030, '赵一', '女', 11, 0);
-INSERT INTO `tb_student` VALUES (259, 113000001, '张三', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (260, 113000002, '李四', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (261, 113000003, '王五', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (262, 113000004, '赵六', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (263, 113000005, '刘七', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (264, 113000006, '陈八', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (265, 113000007, '张九', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (266, 113000008, '王二', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (267, 113000009, '李十', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (268, 113000010, '赵一', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (269, 113000011, '钱六', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (270, 113000012, '孙七', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (271, 113000013, '李八', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (272, 113000014, '周九', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (273, 113000015, '吴十', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (274, 113000016, '郑一', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (275, 113000017, '王六', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (276, 113000018, '赵七', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (277, 113000019, '钱八', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (278, 113000020, '孙九', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (279, 113000021, '张三', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (280, 113000022, '李四', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (281, 113000023, '王五', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (282, 113000024, '赵六', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (283, 113000025, '刘七', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (284, 113000026, '陈八', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (285, 113000027, '张九', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (286, 113000028, '王二', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (287, 113000029, '李十', '男', 12, 0);
-INSERT INTO `tb_student` VALUES (288, 113000030, '赵一', '女', 12, 0);
-INSERT INTO `tb_student` VALUES (289, 101, 'test', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (290, 1, '11', '男', 1, 0);
-INSERT INTO `tb_student` VALUES (291, 1002, 'test', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (2, 2, 101, '李四', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (3, 3, 102, '王五', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (4, 4, 103, '赵六', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (5, 5, 104, '孙七', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (6, 6, 105, '周八', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (7, 7, 106, '吴九', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (8, 8, 107, '郑十', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (9, 9, 108, '王二', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (10, 10, 109, '冯三', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (11, 11, 110, '陈四', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (12, 12, 111, '褚五', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (13, 13, 112, '卫六', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (14, 14, 113, '蒋七', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (15, 15, 114, '沈八', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (16, 16, 115, '韩九', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (17, 17, 116, '杨十', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (18, 18, 117, '朱二', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (19, 19, 118, '秦三', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (20, 20, 119, '尤四', '女', 1, 0);
+INSERT INTO `tb_student` VALUES (21, 21, 120, '许五', '男', 1, 0);
+INSERT INTO `tb_student` VALUES (22, 22, 121, '何六', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (23, 23, 122, '吕七', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (24, 24, 123, '施八', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (25, 25, 124, '张九', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (26, 26, 125, '孔十', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (27, 27, 126, '曹二', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (28, 28, 127, '严三', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (29, 29, 128, '华四', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (30, 30, 129, '金五', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (31, 31, 130, '魏六', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (32, 32, 131, '陶七', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (33, 33, 132, '姜八', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (34, 34, 133, '戚九', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (35, 35, 134, '谢十', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (36, 36, 135, '邹二', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (37, 37, 136, '喻三', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (38, 38, 137, '柏四', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (39, 39, 138, '水五', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (40, 40, 139, '窦六', '女', 4, 0);
+INSERT INTO `tb_student` VALUES (41, 41, 140, '章七', '男', 4, 0);
+INSERT INTO `tb_student` VALUES (42, 42, 141, '云八', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (43, 43, 142, '苏九', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (44, 44, 143, '潘十', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (45, 45, 144, '葛二', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (46, 46, 145, '奚三', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (47, 47, 146, '范四', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (48, 48, 147, '彭五', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (49, 49, 148, '郎六', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (50, 50, 149, '鲁七', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (51, 51, 150, '韦八', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (52, 52, 151, '昌九', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (53, 53, 152, '马十', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (54, 54, 153, '苗二', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (55, 55, 154, '花三', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (56, 56, 155, '方四', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (57, 57, 156, '俞五', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (58, 58, 157, '任六', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (59, 59, 158, '袁七', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (60, 60, 159, '柳八', '女', 7, 0);
+INSERT INTO `tb_student` VALUES (61, 61, 160, '酆九', '男', 7, 0);
+INSERT INTO `tb_student` VALUES (62, 62, 161, '鲍十', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (63, 63, 162, '史二', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (64, 64, 163, '唐三', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (65, 65, 164, '费四', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (66, 66, 165, '廉五', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (67, 67, 166, '岑六', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (68, 68, 167, '薛七', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (69, 69, 168, '雷八', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (70, 70, 169, '贺九', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (71, 71, 170, '倪十', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (72, 72, 171, '汤二', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (73, 73, 172, '滕三', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (74, 74, 173, '殷四', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (75, 75, 174, '罗五', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (76, 76, 175, '毕六', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (77, 77, 176, '郝七', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (78, 78, 177, '邬八', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (79, 79, 178, '安九', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (80, 80, 179, '常十', '女', 8, 0);
+INSERT INTO `tb_student` VALUES (81, 81, 180, '乐二', '男', 8, 0);
+INSERT INTO `tb_student` VALUES (82, 82, 181, '于三', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (83, 83, 182, '时四', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (84, 84, 183, '傅五', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (85, 85, 184, '皮六', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (86, 86, 185, '卞七', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (87, 87, 186, '齐八', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (88, 88, 187, '康九', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (89, 89, 188, '伍十', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (90, 90, 189, '余二', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (91, 91, 190, '元三', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (92, 92, 191, '卜四', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (93, 93, 192, '顾五', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (94, 94, 193, '孟六', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (95, 95, 194, '平七', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (96, 96, 195, '黄八', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (97, 97, 196, '和九', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (98, 98, 197, '穆十', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (99, 99, 198, '萧二', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (100, 100, 199, '尹三', '女', 9, 0);
+INSERT INTO `tb_student` VALUES (101, 101, 200, '姚四', '男', 9, 0);
+INSERT INTO `tb_student` VALUES (102, 102, 201, '邵五', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (103, 103, 202, '湛六', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (104, 104, 203, '汪七', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (105, 105, 204, '祁八', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (106, 106, 205, '毛九', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (107, 107, 206, '禹十', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (108, 108, 207, '狄二', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (109, 109, 208, '米三', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (110, 110, 209, '贝四', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (111, 111, 210, '明五', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (112, 112, 211, '臧六', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (113, 113, 212, '计七', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (114, 114, 213, '伏八', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (115, 115, 214, '成九', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (116, 116, 215, '戴十', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (117, 117, 216, '谈二', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (118, 118, 217, '宋三', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (119, 119, 218, '茅四', '男', 10, 0);
+INSERT INTO `tb_student` VALUES (120, 120, 219, '庞五', '女', 10, 0);
+INSERT INTO `tb_student` VALUES (121, 121, 220, '熊六', '男', 10, 0);
+
+-- ----------------------------
+-- Table structure for tb_user
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_user`;
+CREATE TABLE `tb_user`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `deleted` int NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 202 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_user
+-- ----------------------------
+INSERT INTO `tb_user` VALUES (1, 'root', 'root', '1', 0);
+INSERT INTO `tb_user` VALUES (2, '101', '101', '2', 0);
+INSERT INTO `tb_user` VALUES (3, '102', '102', '2', 0);
+INSERT INTO `tb_user` VALUES (4, '103', '103', '2', 0);
+INSERT INTO `tb_user` VALUES (5, '104', '104', '2', 0);
+INSERT INTO `tb_user` VALUES (6, '105', '105', '2', 0);
+INSERT INTO `tb_user` VALUES (7, '106', '106', '2', 0);
+INSERT INTO `tb_user` VALUES (8, '107', '107', '2', 0);
+INSERT INTO `tb_user` VALUES (9, '108', '108', '2', 0);
+INSERT INTO `tb_user` VALUES (10, '109', '109', '2', 0);
+INSERT INTO `tb_user` VALUES (11, '110', '110', '2', 0);
+INSERT INTO `tb_user` VALUES (12, '111', '111', '2', 0);
+INSERT INTO `tb_user` VALUES (13, '112', '112', '2', 0);
+INSERT INTO `tb_user` VALUES (14, '113', '113', '2', 0);
+INSERT INTO `tb_user` VALUES (15, '114', '114', '2', 0);
+INSERT INTO `tb_user` VALUES (16, '115', '115', '2', 0);
+INSERT INTO `tb_user` VALUES (17, '116', '116', '2', 0);
+INSERT INTO `tb_user` VALUES (18, '117', '117', '2', 0);
+INSERT INTO `tb_user` VALUES (19, '118', '118', '2', 0);
+INSERT INTO `tb_user` VALUES (20, '119', '119', '2', 0);
+INSERT INTO `tb_user` VALUES (21, '120', '120', '2', 0);
+INSERT INTO `tb_user` VALUES (22, '121', '121', '2', 0);
+INSERT INTO `tb_user` VALUES (23, '122', '122', '2', 0);
+INSERT INTO `tb_user` VALUES (24, '123', '123', '2', 0);
+INSERT INTO `tb_user` VALUES (25, '124', '124', '2', 0);
+INSERT INTO `tb_user` VALUES (26, '125', '125', '2', 0);
+INSERT INTO `tb_user` VALUES (27, '126', '126', '2', 0);
+INSERT INTO `tb_user` VALUES (28, '127', '127', '2', 0);
+INSERT INTO `tb_user` VALUES (29, '128', '128', '2', 0);
+INSERT INTO `tb_user` VALUES (30, '129', '129', '2', 0);
+INSERT INTO `tb_user` VALUES (31, '130', '130', '2', 0);
+INSERT INTO `tb_user` VALUES (32, '131', '131', '2', 0);
+INSERT INTO `tb_user` VALUES (33, '132', '132', '2', 0);
+INSERT INTO `tb_user` VALUES (34, '133', '133', '2', 0);
+INSERT INTO `tb_user` VALUES (35, '134', '134', '2', 0);
+INSERT INTO `tb_user` VALUES (36, '135', '135', '2', 0);
+INSERT INTO `tb_user` VALUES (37, '136', '136', '2', 0);
+INSERT INTO `tb_user` VALUES (38, '137', '137', '2', 0);
+INSERT INTO `tb_user` VALUES (39, '138', '138', '2', 0);
+INSERT INTO `tb_user` VALUES (40, '139', '139', '2', 0);
+INSERT INTO `tb_user` VALUES (41, '140', '140', '2', 0);
+INSERT INTO `tb_user` VALUES (42, '141', '141', '2', 0);
+INSERT INTO `tb_user` VALUES (43, '142', '142', '2', 0);
+INSERT INTO `tb_user` VALUES (44, '143', '143', '2', 0);
+INSERT INTO `tb_user` VALUES (45, '144', '144', '2', 0);
+INSERT INTO `tb_user` VALUES (46, '145', '145', '2', 0);
+INSERT INTO `tb_user` VALUES (47, '146', '146', '2', 0);
+INSERT INTO `tb_user` VALUES (48, '147', '147', '2', 0);
+INSERT INTO `tb_user` VALUES (49, '148', '148', '2', 0);
+INSERT INTO `tb_user` VALUES (50, '149', '149', '2', 0);
+INSERT INTO `tb_user` VALUES (51, '150', '150', '2', 0);
+INSERT INTO `tb_user` VALUES (52, '151', '151', '2', 0);
+INSERT INTO `tb_user` VALUES (53, '152', '152', '2', 0);
+INSERT INTO `tb_user` VALUES (54, '153', '153', '2', 0);
+INSERT INTO `tb_user` VALUES (55, '154', '154', '2', 0);
+INSERT INTO `tb_user` VALUES (56, '155', '155', '2', 0);
+INSERT INTO `tb_user` VALUES (57, '156', '156', '2', 0);
+INSERT INTO `tb_user` VALUES (58, '157', '157', '2', 0);
+INSERT INTO `tb_user` VALUES (59, '158', '158', '2', 0);
+INSERT INTO `tb_user` VALUES (60, '159', '159', '2', 0);
+INSERT INTO `tb_user` VALUES (61, '160', '160', '2', 0);
+INSERT INTO `tb_user` VALUES (62, '161', '161', '2', 0);
+INSERT INTO `tb_user` VALUES (63, '162', '162', '2', 0);
+INSERT INTO `tb_user` VALUES (64, '163', '163', '2', 0);
+INSERT INTO `tb_user` VALUES (65, '164', '164', '2', 0);
+INSERT INTO `tb_user` VALUES (66, '165', '165', '2', 0);
+INSERT INTO `tb_user` VALUES (67, '166', '166', '2', 0);
+INSERT INTO `tb_user` VALUES (68, '167', '167', '2', 0);
+INSERT INTO `tb_user` VALUES (69, '168', '168', '2', 0);
+INSERT INTO `tb_user` VALUES (70, '169', '169', '2', 0);
+INSERT INTO `tb_user` VALUES (71, '170', '170', '2', 0);
+INSERT INTO `tb_user` VALUES (72, '171', '171', '2', 0);
+INSERT INTO `tb_user` VALUES (73, '172', '172', '2', 0);
+INSERT INTO `tb_user` VALUES (74, '173', '173', '2', 0);
+INSERT INTO `tb_user` VALUES (75, '174', '174', '2', 0);
+INSERT INTO `tb_user` VALUES (76, '175', '175', '2', 0);
+INSERT INTO `tb_user` VALUES (77, '176', '176', '2', 0);
+INSERT INTO `tb_user` VALUES (78, '177', '177', '2', 0);
+INSERT INTO `tb_user` VALUES (79, '178', '178', '2', 0);
+INSERT INTO `tb_user` VALUES (80, '179', '179', '2', 0);
+INSERT INTO `tb_user` VALUES (81, '180', '180', '2', 0);
+INSERT INTO `tb_user` VALUES (82, '181', '181', '2', 0);
+INSERT INTO `tb_user` VALUES (83, '182', '182', '2', 0);
+INSERT INTO `tb_user` VALUES (84, '183', '183', '2', 0);
+INSERT INTO `tb_user` VALUES (85, '184', '184', '2', 0);
+INSERT INTO `tb_user` VALUES (86, '185', '185', '2', 0);
+INSERT INTO `tb_user` VALUES (87, '186', '186', '2', 0);
+INSERT INTO `tb_user` VALUES (88, '187', '187', '2', 0);
+INSERT INTO `tb_user` VALUES (89, '188', '188', '2', 0);
+INSERT INTO `tb_user` VALUES (90, '189', '189', '2', 0);
+INSERT INTO `tb_user` VALUES (91, '190', '190', '2', 0);
+INSERT INTO `tb_user` VALUES (92, '191', '191', '2', 0);
+INSERT INTO `tb_user` VALUES (93, '192', '192', '2', 0);
+INSERT INTO `tb_user` VALUES (94, '193', '193', '2', 0);
+INSERT INTO `tb_user` VALUES (95, '194', '194', '2', 0);
+INSERT INTO `tb_user` VALUES (96, '195', '195', '2', 0);
+INSERT INTO `tb_user` VALUES (97, '196', '196', '2', 0);
+INSERT INTO `tb_user` VALUES (98, '197', '197', '2', 0);
+INSERT INTO `tb_user` VALUES (99, '198', '198', '2', 0);
+INSERT INTO `tb_user` VALUES (100, '199', '199', '2', 0);
+INSERT INTO `tb_user` VALUES (101, '200', '200', '2', 0);
+INSERT INTO `tb_user` VALUES (102, '201', '201', '2', 0);
+INSERT INTO `tb_user` VALUES (103, '202', '202', '2', 0);
+INSERT INTO `tb_user` VALUES (104, '203', '203', '2', 0);
+INSERT INTO `tb_user` VALUES (105, '204', '204', '2', 0);
+INSERT INTO `tb_user` VALUES (106, '205', '205', '2', 0);
+INSERT INTO `tb_user` VALUES (107, '206', '206', '2', 0);
+INSERT INTO `tb_user` VALUES (108, '207', '207', '2', 0);
+INSERT INTO `tb_user` VALUES (109, '208', '208', '2', 0);
+INSERT INTO `tb_user` VALUES (110, '209', '209', '2', 0);
+INSERT INTO `tb_user` VALUES (111, '210', '210', '2', 0);
+INSERT INTO `tb_user` VALUES (112, '211', '211', '2', 0);
+INSERT INTO `tb_user` VALUES (113, '212', '212', '2', 0);
+INSERT INTO `tb_user` VALUES (114, '213', '213', '2', 0);
+INSERT INTO `tb_user` VALUES (115, '214', '214', '2', 0);
+INSERT INTO `tb_user` VALUES (116, '215', '215', '2', 0);
+INSERT INTO `tb_user` VALUES (117, '216', '216', '2', 0);
+INSERT INTO `tb_user` VALUES (118, '217', '217', '2', 0);
+INSERT INTO `tb_user` VALUES (119, '218', '218', '2', 0);
+INSERT INTO `tb_user` VALUES (120, '219', '219', '2', 0);
+INSERT INTO `tb_user` VALUES (121, '220', '220', '2', 0);
+INSERT INTO `tb_user` VALUES (122, '221', '221', '2', 0);
+INSERT INTO `tb_user` VALUES (123, '222', '222', '2', 0);
+INSERT INTO `tb_user` VALUES (124, '223', '223', '2', 0);
+INSERT INTO `tb_user` VALUES (125, '224', '224', '2', 0);
+INSERT INTO `tb_user` VALUES (126, '225', '225', '2', 0);
+INSERT INTO `tb_user` VALUES (127, '226', '226', '2', 0);
+INSERT INTO `tb_user` VALUES (128, '227', '227', '2', 0);
+INSERT INTO `tb_user` VALUES (129, '228', '228', '2', 0);
+INSERT INTO `tb_user` VALUES (130, '229', '229', '2', 0);
+INSERT INTO `tb_user` VALUES (131, '230', '230', '2', 0);
+INSERT INTO `tb_user` VALUES (132, '231', '231', '2', 0);
+INSERT INTO `tb_user` VALUES (133, '232', '232', '2', 0);
+INSERT INTO `tb_user` VALUES (134, '233', '233', '2', 0);
+INSERT INTO `tb_user` VALUES (135, '234', '234', '2', 0);
+INSERT INTO `tb_user` VALUES (136, '235', '235', '2', 0);
+INSERT INTO `tb_user` VALUES (137, '236', '236', '2', 0);
+INSERT INTO `tb_user` VALUES (138, '237', '237', '2', 0);
+INSERT INTO `tb_user` VALUES (139, '238', '238', '2', 0);
+INSERT INTO `tb_user` VALUES (140, '239', '239', '2', 0);
+INSERT INTO `tb_user` VALUES (141, '240', '240', '2', 0);
+INSERT INTO `tb_user` VALUES (142, '241', '241', '2', 0);
+INSERT INTO `tb_user` VALUES (143, '242', '242', '2', 0);
+INSERT INTO `tb_user` VALUES (144, '243', '243', '2', 0);
+INSERT INTO `tb_user` VALUES (145, '244', '244', '2', 0);
+INSERT INTO `tb_user` VALUES (146, '245', '245', '2', 0);
+INSERT INTO `tb_user` VALUES (147, '246', '246', '2', 0);
+INSERT INTO `tb_user` VALUES (148, '247', '247', '2', 0);
+INSERT INTO `tb_user` VALUES (149, '248', '248', '2', 0);
+INSERT INTO `tb_user` VALUES (150, '249', '249', '2', 0);
+INSERT INTO `tb_user` VALUES (151, '250', '250', '2', 0);
+INSERT INTO `tb_user` VALUES (152, '251', '251', '2', 0);
+INSERT INTO `tb_user` VALUES (153, '252', '252', '2', 0);
+INSERT INTO `tb_user` VALUES (154, '253', '253', '2', 0);
+INSERT INTO `tb_user` VALUES (155, '254', '254', '2', 0);
+INSERT INTO `tb_user` VALUES (156, '255', '255', '2', 0);
+INSERT INTO `tb_user` VALUES (157, '256', '256', '2', 0);
+INSERT INTO `tb_user` VALUES (158, '257', '257', '2', 0);
+INSERT INTO `tb_user` VALUES (159, '258', '258', '2', 0);
+INSERT INTO `tb_user` VALUES (160, '259', '259', '2', 0);
+INSERT INTO `tb_user` VALUES (161, '260', '260', '2', 0);
+INSERT INTO `tb_user` VALUES (162, '261', '261', '2', 0);
+INSERT INTO `tb_user` VALUES (163, '262', '262', '2', 0);
+INSERT INTO `tb_user` VALUES (164, '263', '263', '2', 0);
+INSERT INTO `tb_user` VALUES (165, '264', '264', '2', 0);
+INSERT INTO `tb_user` VALUES (166, '265', '265', '2', 0);
+INSERT INTO `tb_user` VALUES (167, '266', '266', '2', 0);
+INSERT INTO `tb_user` VALUES (168, '267', '267', '2', 0);
+INSERT INTO `tb_user` VALUES (169, '268', '268', '2', 0);
+INSERT INTO `tb_user` VALUES (170, '269', '269', '2', 0);
+INSERT INTO `tb_user` VALUES (171, '270', '270', '2', 0);
+INSERT INTO `tb_user` VALUES (172, '271', '271', '2', 0);
+INSERT INTO `tb_user` VALUES (173, '272', '272', '2', 0);
+INSERT INTO `tb_user` VALUES (174, '273', '273', '2', 0);
+INSERT INTO `tb_user` VALUES (175, '274', '274', '2', 0);
+INSERT INTO `tb_user` VALUES (176, '275', '275', '2', 0);
+INSERT INTO `tb_user` VALUES (177, '276', '276', '2', 0);
+INSERT INTO `tb_user` VALUES (178, '277', '277', '2', 0);
+INSERT INTO `tb_user` VALUES (179, '278', '278', '2', 0);
+INSERT INTO `tb_user` VALUES (180, '279', '279', '2', 0);
+INSERT INTO `tb_user` VALUES (181, '280', '280', '2', 0);
+INSERT INTO `tb_user` VALUES (182, '281', '281', '2', 0);
+INSERT INTO `tb_user` VALUES (183, '282', '282', '2', 0);
+INSERT INTO `tb_user` VALUES (184, '283', '283', '2', 0);
+INSERT INTO `tb_user` VALUES (185, '284', '284', '2', 0);
+INSERT INTO `tb_user` VALUES (186, '285', '285', '2', 0);
+INSERT INTO `tb_user` VALUES (187, '286', '286', '2', 0);
+INSERT INTO `tb_user` VALUES (188, '287', '287', '2', 0);
+INSERT INTO `tb_user` VALUES (189, '288', '288', '2', 0);
+INSERT INTO `tb_user` VALUES (190, '289', '289', '2', 0);
+INSERT INTO `tb_user` VALUES (191, '290', '290', '2', 0);
+INSERT INTO `tb_user` VALUES (192, '291', '291', '2', 0);
+INSERT INTO `tb_user` VALUES (193, '292', '292', '2', 0);
+INSERT INTO `tb_user` VALUES (194, '293', '293', '2', 0);
+INSERT INTO `tb_user` VALUES (195, '294', '294', '2', 0);
+INSERT INTO `tb_user` VALUES (196, '295', '295', '2', 0);
+INSERT INTO `tb_user` VALUES (197, '296', '296', '2', 0);
+INSERT INTO `tb_user` VALUES (198, '297', '297', '2', 0);
+INSERT INTO `tb_user` VALUES (199, '298', '298', '2', 0);
+INSERT INTO `tb_user` VALUES (200, '299', '299', '2', 0);
+INSERT INTO `tb_user` VALUES (201, '300', '300', '2', 0);
 
 -- ----------------------------
 -- View structure for record_detail

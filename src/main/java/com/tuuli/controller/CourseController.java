@@ -8,6 +8,7 @@ import com.tuuli.vo.CollegeAndClassAndCourseVo;
 import com.tuuli.vo.CourseVo;
 import com.tuuli.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
@@ -29,21 +30,25 @@ public class CourseController {
     @Autowired
     private ICourseService courseService;
 
+    @PreAuthorize("hasAnyRole('1')")
     @PostMapping("/getSelectCourse")
-    public R<List<CollegeAndClassAndCourseVo>> getAllClass(@RequestBody Integer[] classId){
+    public R<List<CollegeAndClassAndCourseVo>> getAllClass(@RequestBody Integer[] classId) {
         List<CollegeAndClassAndCourseVo> courseVoList = courseService.getAllCourse(classId);
         return R.success(courseVoList);
     }
 
+    @PreAuthorize("hasAnyRole('1')")
     @PostMapping("/getCoursePage")
-    public R<PageVo<CourseVo>> getCoursePage(@RequestBody CourseDto courseDto){
+    public R<PageVo<CourseVo>> getCoursePage(@RequestBody CourseDto courseDto) {
         PageVo<CourseVo> courseVoList = courseService.getCoursePage(courseDto);
         return R.success(courseVoList);
     }
 
+    @PreAuthorize("hasAnyRole('1')")
     @GetMapping("/queryCourseById/{id}")
-    public R<CourseVo> queryCourseById(@PathVariable Integer id){
+    public R<CourseVo> queryCourseById(@PathVariable Integer id) {
         CourseVo courseVo = courseService.queryCourseById(id);
+        System.out.println(courseVo);
         return R.success(courseVo);
     }
 

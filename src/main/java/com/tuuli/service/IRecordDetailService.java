@@ -18,4 +18,6 @@ import java.util.List;
 public interface IRecordDetailService extends IService<RecordDetail> {
 
     PageVo<RecordDetail> getRecordPage(RecordDto recordDto);
+
+    List<RecordDetail> getStuRecordPage(Integer stuId);
 }

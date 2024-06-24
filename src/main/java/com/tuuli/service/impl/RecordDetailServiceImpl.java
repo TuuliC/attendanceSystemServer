@@ -4,14 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.tuuli.dao.ClassDao;
-import com.tuuli.dao.CollegeDao;
-import com.tuuli.dao.CourseDao;
-import com.tuuli.domain.Classs;
-import com.tuuli.domain.College;
-import com.tuuli.domain.Course;
-import com.tuuli.domain.RecordDetail;
-import com.tuuli.dao.RecordDetailDao;
+import com.tuuli.dao.*;
+import com.tuuli.domain.*;
 import com.tuuli.dto.RecordDto;
 import com.tuuli.service.IRecordDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -43,6 +37,8 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
     private CollegeDao collegeDao;
     @Autowired
     private ClassDao classDao;
+    @Autowired
+    private StudentDao studentDao;
 
     @Override
     public PageVo<RecordDetail> getRecordPage(RecordDto recordDto) {
@@ -88,5 +84,14 @@ public class RecordDetailServiceImpl extends ServiceImpl<RecordDetailDao, Record
         recordDetailPageVo.setDataList(recordDetailIPage.getRecords());
         recordDetailPageVo.setCount(recordDetailPageVo.getCount());
         return recordDetailPageVo;
+    }
+
+    @Override
+    public List<RecordDetail> getStuRecordPage(Integer stuId) {
+        System.out.println("stuId = " + stuId);
+        final Student student = studentDao.selectById(stuId);
+        LambdaQueryWrapper<RecordDetail> recordQueryWrapper = new LambdaQueryWrapper<>();
+        recordQueryWrapper.eq(RecordDetail::getNum, student.getNum());
+        return recordDetailDao.selectList(recordQueryWrapper);
     }
 }

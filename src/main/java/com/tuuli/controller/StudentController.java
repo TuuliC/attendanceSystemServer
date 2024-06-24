@@ -10,6 +10,7 @@ import com.tuuli.vo.CallNameVo;
 import com.tuuli.vo.PageVo;
 import com.tuuli.vo.StudentVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
  * @author tuuli
  * @since 2023-05-22
  */
-@CrossOrigin(origins = "http://localhost:8089", methods = {RequestMethod.POST,RequestMethod.GET}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:8089", methods = {RequestMethod.POST, RequestMethod.GET}, allowCredentials = "true")
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -30,38 +31,44 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
+    @PreAuthorize("hasAnyRole('1')")
     @PostMapping("/getStudentPage")
     public R<PageVo<StudentVo>> getStudentPage(@RequestBody StudentDto studentDto) {
         PageVo<StudentVo> studentVoList = studentService.getStudentPage(studentDto);
         return R.success(studentVoList);
     }
 
+    @PreAuthorize("hasAnyRole('1')")
     @PostMapping("/getListCallPage")
     public R<PageVo<CallNameVo>> getListCallPage(@RequestBody CallNameDto callNameDto) {
         PageVo<CallNameVo> listCallVoName = studentService.getListCallPage(callNameDto);
         return R.success(listCallVoName);
     }
 
+    @PreAuthorize("hasAnyRole('1')")
     @GetMapping("/queryStudentById/{id}")
-    public R<StudentVo> queryStudentById(@PathVariable Integer id){
+    public R<StudentVo> queryStudentById(@PathVariable Integer id) {
         StudentVo studentVo = studentService.queryStudentById(id);
         return R.success(studentVo);
     }
 
+    @PreAuthorize("hasAnyRole('1')")
     @PostMapping("/updateStudent")
-    public R<String> updateStudent(@RequestBody Student student){
+    public R<String> updateStudent(@RequestBody Student student) {
         studentService.updateStudent(student);
         return R.success("success");
     }
 
+    @PreAuthorize("hasAnyRole('1')")
     @PostMapping("/addStudent")
-    public R<String> addStudent(@RequestBody Student student){
+    public R<String> addStudent(@RequestBody Student student) {
         studentService.addStudent(student);
         return R.success("success");
     }
 
+    @PreAuthorize("hasAnyRole('1')")
     @PostMapping("/deleteStudent")
-    public R<String> deleteStudent(@RequestBody Integer[] id){
+    public R<String> deleteStudent(@RequestBody Integer[] id) {
         studentService.deleteStudent(id);
         return R.success("success");
     }

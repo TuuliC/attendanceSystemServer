@@ -25,6 +25,9 @@ import java.util.List;
 @Mapper
 public interface StudentDao extends BaseMapper<Student> {
 
+    @Select("select id from tb_student where class_id = #{classsId}")
+    List<Integer> selectIdByClassId(int classsId);
+
     //    @Select(" select student.id       as id,\n" +
 //            "               student.stu_num  as num,\n" +
 //            "               student.stu_name as name,\n" +
